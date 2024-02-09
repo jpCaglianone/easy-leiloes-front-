@@ -1,35 +1,40 @@
 import React from 'react';
-import logo from '../src/assets/logo.png';
-import './css/styles.css'
+import logo from '../../../src/assets/logo1.png';
+import '../../css/styles.css'
 
 
-const Header = () => {
+const Top = () => {
   return (
     <>
       <div className="container-fluid bg-white" id="header">
 
-        <div className="row bg-white text-white">
+        <div className="row">
 
-          <div className="col-1 col-xs-10 d-flex align-items-center justify-content-between">
-            <a href="#" className="text mx-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
-                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+          <div className="col-2 d-flex align-items-center justify-content-center">
+            <a href="#" className="text mx-3 nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#262b1e" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                <path fillRule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
               </svg>
+              <p>Entrar</p>
             </a>
-            <a href="#" className="text mx-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-person-add" viewBox="0 0 16 16">
+
+            <a href="#" className="text mx-3 nav-link">
+            
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#262b1e" class="bi bi-person-add" viewBox="0 0 16 16">
                 <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
                 <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
               </svg>
+              <p className='text-custom'>Cadastrar</p>
             </a>
+            
           </div>
 
-          <div className="col-10 text-center" id="logo-container">
+          <div className="col-8 text-center" id="logo-container">
             <img src={logo} alt="Logo" className="img-fluid" id="logo-img" />
           </div>
 
-          <div className="col-1 d-flex align-items-center justify-content-end" id="social-medias">
+          <div className="col-2 d-flex align-items-center justify-content-center" id="social-medias">
             <a href="#" className="text mx-3 mx-sm-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#1877f2" class="bi bi-facebook" viewBox="0 0 16 16">
                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
@@ -52,93 +57,14 @@ const Header = () => {
             </a>
             <a href="#" className='text mx-3 mx-sm-2'>
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
               </svg>
             </a>
           </div>
         </div>
       </div>
-      
-      <nav className="navbar navbar-expand-lg">
-        <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a className="nav-link" href="#">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item ">
-                <a className="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item dropdown ">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown link
-                </a>
-                <ul className="dropdown-menu ">
-                  <li >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li > 
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li >
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                  <li>
-                    <nav className="navbar bg-body-tertiary">
-                      <div className="container-fluid">
-                        <form className="d-flex" role="search">
-                          <input 
-                          className="form-control me-2 bg-white" 
-                          type="search" 
-                          placeholder="Search" 
-                          aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">
-                              Search
-                              </button>
-                        </form>
-                      </div>
-                    </nav>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
     </>
   );
 };
 
-export default Header;
+export default Top;

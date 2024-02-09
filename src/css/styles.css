@@ -5,21 +5,42 @@
 #logo-img{
     width: 185px;
     height: 150px;
-    border-radius: 50px;
+    border-radius: 15px;
 }
 
 .container-fluid{
     justify-content: space-between;
 }
+nav{
+    margin-top: 10px;
+}
 .navbar{
     height: 85px;
-    background-image: linear-gradient(120deg, rgb(0,31,36),rgb(10,55,46));
+    background-image: linear-gradient(120deg,RGB(38, 43, 30),rgb(10,55,46));
 }
 .nav-item > a{
-    color:#c3a66a;
+    color:rgb(222,182,110);
     font-size: 20px;
     margin-left: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: all 0.25s;
+}
+.nav-item > a:hover{
+    color: goldenrod;
+    transform: scale(1.15);
+    transition: all 0.25s;
+}
+.nav-link{
+    color: #262b1e;
+    transition: all 0.25s;
+}
+.nav-link:hover{
+    transform: scale(1.075);
+    transition: all 0.25s;
+    font-weight: bold;
+}
+.text-custom{
+    color: #262b1e
 }
 /* @media (max-width: 650px) {
     #social-medias{
