@@ -1,7 +1,30 @@
+
 #logo-container{
     padding: 10px;
 }
 #logo-img{
-    width: 250px;
+    width: 185px;
+    height: 150px;
     border-radius: 50px;
 }
+
+.container-fluid{
+    justify-content: space-between;
+}
+.navbar{
+    height: 85px;
+    background-image: linear-gradient(120deg, rgb(0,31,36),rgb(10,55,46));
+}
+.nav-item > a{
+    color:#c3a66a;
+    font-size: 20px;
+    margin-left: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* @media (max-width: 650px) {
+    #social-medias{
+        display: none;
+        background-color: red;
+        visibility: hidden;
+    }
+} */
