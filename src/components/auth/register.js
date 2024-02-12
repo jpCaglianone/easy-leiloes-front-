@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import $ from 'jquery'; // Importe o jQuery
 import '../../css/styles.css';
 
 const Register = () => {
 
     useEffect(() => {
+        // Certifique-se de que o jQuery está disponível globalmente
+        window.$ = $;
+        window.jQuery = $;
+
         $(document).ready(() => {
             $("#btn-registrar").on("click", (event) => {
                 event.preventDefault();
                 alert("teste ok!");
-            })
-        })
+            });
+        });
     }, []);
 
 
