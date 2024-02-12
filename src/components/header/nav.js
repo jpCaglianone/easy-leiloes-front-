@@ -5,7 +5,6 @@ import '../../css/styles.css'
 const Nav = () => {
   return (
     <>
-     
 
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
