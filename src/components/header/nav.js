@@ -22,24 +22,24 @@ const Nav = () => {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">
+                <a className="nav-link" aria-current="page" href="/teste">
                   Principal
                 </a>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/teste">
                   Sobre nós
                 </a>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/teste">
                   Nossos serviços
                 </a>
               </li>
               <li className="nav-item dropdown ">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                  href="/teste"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -48,17 +48,17 @@ const Nav = () => {
                 </a>
                 <ul className="dropdown-menu ">
                   <li >
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/teste">
                       Action
                     </a>
                   </li>
                   <li >
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/teste">
                       Another action
                     </a>
                   </li>
                   <li >
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/teste">
                       Something else here
                     </a>
                   </li>
