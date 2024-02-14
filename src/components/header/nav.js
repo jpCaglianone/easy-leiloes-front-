@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/styles.css';
+import { Link } from 'react-router-dom';
 
 
 const Nav = () => {
@@ -22,9 +23,9 @@ const Nav = () => {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/teste">
+              <Link to="/" className="text mx-3 nav-link nav-custom">
                   Principal
-                </a>
+                </Link>
               </li>
               <li className="nav-item ">
                 <a className="nav-link" href="/teste">

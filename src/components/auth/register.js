@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import $ from 'jquery'; // Importe o jQuery
+import $ from 'jquery';
 import '../../css/styles.css';
+import Top from '../header/top';
 
 const Register = () => {
 
@@ -19,9 +20,15 @@ const Register = () => {
 
 
     return (
-        <div className="container">
+
+        <>
+
+        <Top/>
+
+        <div className="container" id='custom-register'>
+            <br></br>
             <h2>Registrar-se</h2>
-            <div className='col-4 mx-auto'>
+            <div className='col-6 mx-auto'>
                 <form>
 
                     <div className="form-group">
@@ -49,10 +56,12 @@ const Register = () => {
                         <input type="password" className="form-control" id='cPassword' required />
                     </div>
                     <button type="submit" className="btn btn-primary" id="btn-registrar">Registrar</button>
-
+                    
                 </form>
+                <br></br>
             </div>
         </div>
+        </>
     );
 };
 

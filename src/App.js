@@ -1,18 +1,21 @@
+import React from 'react';
 import './App.css';
-import Header from './components/header/header';
-import MyCarousel from './components/home/carousel';
-import About from './components/home/about'; 
+import Main from './components/home/main';
 import Register from './components/auth/register'; 
-//import Login from './login';
+import Login from './components/auth/login'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <MyCarousel/>
-      <About/>
-      <Register/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path="/" element={<Main />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
