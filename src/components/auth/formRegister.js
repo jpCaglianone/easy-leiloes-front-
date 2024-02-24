@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 
 const FormRegister = () => {
 
 
     let url = "https://a5436e77-1d77-4583-8d79-1a0ec14f8b4a-00-13osuyguj3pdp.janeway.replit.dev/";
 
-
+   
 
     const [formData, setFormData] = useState({
         name: "",
@@ -16,21 +16,20 @@ const FormRegister = () => {
         confirmPassword: ""
     });
 
-    useEffect(()=>{
-        let btnRegister = document.getElementById("btn-register")
-        btnRegister.addEventListener('click', ()=>{
-            fetch(`${url}register`,{
-            method:'POST',
-            headers: {'Content-type':'application/json'},
-            body: JSON.stringify(formData)
-        })
-        .then(resposta => {resposta.json()})
-        .then(dados => console.log(dados))
-        .catch(error => console.error('Erro:', error));
-        })
-        
 
-    },[])
+    const sendRequest = async () => {
+        try {
+            const response = await fetch(`${url}register`, {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    };
 
     const sendData = (event) => {
         let value = event.target.value
@@ -44,8 +43,14 @@ const FormRegister = () => {
 
     const submitFormButton = (event) => {
         event.preventDefault();
+        let btnRegister = document.getElementById("btn-register")
+        btnRegister.addEventListener('click', sendRequest)
+        return () => {
+            btnRegister.removeEventListener('click', sendRequest);
+          };
     }
 
+  
 
     return (
 
