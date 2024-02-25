@@ -62,8 +62,9 @@ const FormRegister = () => {
                 <form>
 
                     <div className="form-group">
-                        <label>Nome completo:</label>
+                        <label htmlFor="nome">Nome completo:</label>
                         <input
+                            data-testid="name"
                             type="text"
                             className="form-control"
                             id='name'
@@ -71,8 +72,9 @@ const FormRegister = () => {
                             required />
                     </div>
                     <div className="form-group">
-                        <label>Data Nascimento:</label>
+                        <label htmlFor="birthday">Data Nascimento:</label>
                         <input
+                            data-testid="birthday"
                             type="date"
                             className="form-control"
                             id='birthday'
@@ -82,6 +84,7 @@ const FormRegister = () => {
                     <div className="form-group">
                         <label>Email:</label>
                         <input
+                            data-testid="email"
                             type="email"
                             className="form-control"
                             id='email'
@@ -91,6 +94,7 @@ const FormRegister = () => {
                     <div className="form-group">
                         <label>Confirme o email:</label>
                         <input
+                            data-testid="confirmEmail"
                             type="email"
                             className="form-control"
                             id='confirmEmail'
@@ -100,6 +104,7 @@ const FormRegister = () => {
                     <div className="form-group">
                         <label>Senha:</label>
                         <input
+                            data-testid="password"
                             type="password"
                             className="form-control"
                             id='password'
@@ -109,6 +114,7 @@ const FormRegister = () => {
                     <div className="form-group">
                         <label>Confirme a senha:</label>
                         <input
+                            data-testid="confirmPassword"
                             type="password"
                             className="form-control"
                             id='confirmPassword'
