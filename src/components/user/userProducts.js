@@ -1,11 +1,13 @@
 import "../../css/styles.css";
+import { Link } from 'react-router-dom';
 
 const UserProducts = () => {
 
+
     return (
         <>
+        <Link to="/userPanel/productsPanel">
             <div className="container card-user">
-
                 <div className="row">
                     <div className="col card-content">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +26,7 @@ const UserProducts = () => {
                     </div>
                 </div>
             </div>
+            </Link>
         </>
     )
 }

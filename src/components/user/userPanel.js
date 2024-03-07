@@ -6,7 +6,6 @@ import UserSettings from "./userSettings";
 import UserAllAuctions from "./userAllAuctions"
 import UserNotifications from "./userNotifications";
 
-
 import "../../css/styles.css";
 
 
