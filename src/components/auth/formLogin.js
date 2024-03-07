@@ -63,8 +63,8 @@ const FormLogin = () => {
             type="email"
             className="form-control"
             id="email"
-            test-id="testEmail"
-            onChange={sendData} />
+            onChange={sendData} 
+            data-testid="email"/>
         </div>
         <div className="form-group">
           <label>Senha:</label>
@@ -72,8 +72,9 @@ const FormLogin = () => {
             type="password"
             className="form-control"
             id="password"
-            test-id="testPassword"
-            onChange={sendData} />
+            data-testid="password"
+            onChange={sendData} 
+            />
         </div>
         <div className="form-group">
           <a href='/rememberPassword'>Esqueci minha senha</a>

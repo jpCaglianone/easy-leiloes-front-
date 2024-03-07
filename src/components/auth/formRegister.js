@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 
 const FormRegister = () => {
-
-
+    
     let url = "https://a5436e77-1d77-4583-8d79-1a0ec14f8b4a-00-13osuyguj3pdp.janeway.replit.dev/";
-
-
 
     const [formData, setFormData] = useState({
         name: "",

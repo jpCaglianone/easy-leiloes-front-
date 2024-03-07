@@ -85,3 +85,51 @@ nav{
         visibility: hidden;
     }
 } */
+
+.user-panel{
+    margin: 100px auto;
+}
+
+.card-user{
+    margin: 20px auto;
+    height: 200px;
+    background-color: rgba(240, 240, 225,0.75);
+    border-radius: 20px;
+    transition: all 0.75s;
+}
+.card-user:hover{
+    background-color:  rgb(20,45,26);
+    transform: scale(1.05);
+    transition: all 0.75s;
+    cursor: pointer;
+}
+
+.card-content{
+    color: rgba(38, 43, 30,0.5);
+    text-align: center;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+.bi-diagram-3, .bi-gear, .bi-person-vcard, .bi-chat-dots, .bi-briefcase,.bi-three-dots{
+    margin-top: 10px;
+    width: 50%;
+    height: auto;
+}
+
+.card-user:hover .bi-diagram-3, 
+.card-user:hover .bi-gear,
+.card-user:hover .bi-person-vcard, 
+.card-user:hover .bi-chat-dots, 
+.card-user:hover .bi-briefcase,
+.card-user:hover .bi-three-dots{
+    fill: goldenrod;
+    color: goldenrod;
+    margin: 25px;
+    transition: all 0.75s;
+}
+
+.card-user:hover .text-cards-user{
+    visibility: hidden;
+    transition: all 0.1s;
+}
