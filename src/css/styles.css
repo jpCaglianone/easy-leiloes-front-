@@ -111,10 +111,23 @@ nav{
     margin: 20px auto;
 }
 
-.bi-diagram-3, .bi-gear, .bi-person-vcard, .bi-chat-dots, .bi-briefcase,.bi-three-dots{
+.bi-diagram-3, 
+.bi-gear, 
+.bi-person-vcard, 
+.bi-chat-dots, 
+.bi-briefcase,
+.bi-three-dots, 
+.bi-bandaid-fill{
     margin-top: 10px;
     width: 50%;
     height: auto;
+}
+
+
+.bi-card-list,
+.bi-plus-circle-fill{
+    margin-top: 20px;
+    width: 40%;
 }
 
 .card-user:hover .bi-diagram-3, 
@@ -122,7 +135,10 @@ nav{
 .card-user:hover .bi-person-vcard, 
 .card-user:hover .bi-chat-dots, 
 .card-user:hover .bi-briefcase,
-.card-user:hover .bi-three-dots{
+.card-user:hover .bi-three-dots,
+.card-user:hover .bi-bandaid-fill,
+.card-user:hover .bi-card-list,
+.card-user:hover .bi-plus-circle-fill{
     fill: goldenrod;
     color: goldenrod;
     margin: 25px;
@@ -132,4 +148,8 @@ nav{
 .card-user:hover .text-cards-user{
     visibility: hidden;
     transition: all 0.1s;
+}
+
+Link {
+    text-decoration: none;
 }

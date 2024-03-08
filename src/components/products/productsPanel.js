@@ -1,33 +1,33 @@
-
-import UserProducts from "../user/userProducts";
-import UserAuctions from "../user/userAuctions";
-import UserAccount from "../user/userAccount";
-import UserSettings from "../user/userSettings";
-import UserAllAuctions from "../user/userAllAuctions"
-import UserNotifications from "../user/userNotifications";
-
-
+import ProductsRegister from "./productsRegister";
+import ProductsList from "./productsList";
+import React from "react";
+import { useState } from "react";
 import "../../css/styles.css";
 
 const ProductsPanel = () => {
+
+    const [typeAction, setTypeAction] = useState ("")
+
+    function activeCard(event) {
+       console.log(event.target)
+    }
+
     return (
         <>
-        
             <div className="container user-panel">
                 <div className="row justify-content-center">
-                    <div className="col-3">
-                        Cadastrar meu produto
+                    <div className="col-2">
+                        <ProductsRegister  onClick={activeCard}/>
                     </div>
-                    <div className="col-3">
-                        alterar/excluir meu produto
+                    
+                    <div className="col-2">
+                        <ProductsList id="productsList" onClick={activeCard}/>
                     </div>
-                    <div className="col-3">
-                        listar meus produtos
-                    </div>
-                </div>
-
-                
+                </div>                
             </div>
+            <main>
+                {/* <MainProducts type={typeAction} ></MainProducts> */}
+            </main>
         </>
     )
 }
