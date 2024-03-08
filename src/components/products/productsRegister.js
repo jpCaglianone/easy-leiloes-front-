@@ -9,7 +9,7 @@ const ProductsRegister = (
         <>
             <div className="container card-user"  onClick={onClick} >
                 <div className="row">
-                    <div className="col card-content" id="productsRegister">
+                    <div className="col card-content" >
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         fill="currentColor" 
                         class="bi bi-plus-circle-fill" 
