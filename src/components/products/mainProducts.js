@@ -13,7 +13,7 @@ const MainProducts = (props) => {
 
     else {
         return (
-            <h1> MainProducts </h1>
+            <> </>
         )
     }
 }

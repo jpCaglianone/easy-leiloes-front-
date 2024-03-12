@@ -1,80 +1,96 @@
+body {
+    min-height: 100vh;
+}
 
-#logo-container{
+#logo-container {
     padding: 10px;
 }
-#logo-img{
+
+#logo-img {
     width: 185px;
     height: 150px;
     border-radius: 15px;
 }
 
-.container-fluid{
+.container-fluid {
     justify-content: space-between;
 }
-nav{
+
+nav {
     margin-top: 10px;
 }
-.navbar{
+
+.navbar {
     height: 85px;
-    background-image: linear-gradient(120deg,RGB(38, 43, 30),rgb(10,55,46));
+    background-image: linear-gradient(120deg, RGB(38, 43, 30), rgb(10, 55, 46));
 }
-.nav-item > a{
-    color:rgb(222,182,110);
+
+.nav-item>a {
+    color: rgb(222, 182, 110);
     font-size: 20px;
     margin-left: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     transition: all 0.25s;
 }
-.nav-item > a:hover{
+
+.nav-item>a:hover {
     color: goldenrod;
     transform: scale(1.15);
     transition: all 0.25s;
 }
-.nav-link{
+
+.nav-link {
     color: #262b1e;
     transition: all 0.25s;
 }
-.nav-custom:hover{
+
+.nav-custom:hover {
     transform: scale(1.075);
     transition: all 0.25s;
     font-weight: bold;
 }
-.text-custom{
+
+.text-custom {
     color: rgb(38, 43, 30);
 }
-.d-block{
+
+.d-block {
     width: 30%;
     height: 500px;
     margin: 100px auto 0;
     border-radius: 20px;
-    
+
 }
-.about-text{
+
+.about-text {
     margin: 150px;
     font-size: 20px;
     font-family: Roboto;
     border: 1px solid RGB(38, 43, 30);
     box-shadow: 5px 5px 10px 2px rgb(38, 43, 30);
-    color:rgb(38, 43, 30);
+    color: rgb(38, 43, 30);
     border-radius: 10px;
-    
+
 }
-#custom-register{
+
+#custom-register {
     margin-top: 75px;
     background-color: rgba(38, 43, 30, 0.25);
     width: 40%;
     border-radius: 20px;
 }
 
-.mx-auto > form > button, form > div > label {
+.mx-auto>form>button,
+form>div>label {
     margin-top: 20px;
 }
-.form-group > label{
+
+.form-group>label {
     font-family: Georgia, Times, 'Times New Roman', serif;
 }
 
-#custom-login > form > .form-group > button {
-    margin-left: 10%; 
+#custom-login>form>.form-group>button {
+    margin-left: 10%;
     margin-top: 25px;
 }
 
@@ -86,38 +102,39 @@ nav{
     }
 } */
 
-.user-panel{
+.user-panel {
     margin: 100px auto;
 }
 
-.card-user{
+.card-user {
     margin: 20px auto;
     height: 200px;
-    background-color: rgba(240, 240, 225,0.75);
+    background-color: rgba(240, 240, 225, 0.75);
     border-radius: 20px;
     transition: all 0.75s;
 }
-.card-user:hover{
-    background-color:  rgb(20,45,26);
+
+.card-user:hover {
+    background-color: rgb(20, 45, 26);
     transform: scale(1.05);
     transition: all 0.75s;
     cursor: pointer;
 }
 
-.card-content{
-    color: rgba(38, 43, 30,0.5);
+.card-content {
+    color: rgba(38, 43, 30, 0.5);
     text-align: center;
     font-weight: bold;
     margin: 20px auto;
 }
 
-.bi-diagram-3, 
-.bi-gear, 
-.bi-person-vcard, 
-.bi-chat-dots, 
+.bi-diagram-3,
+.bi-gear,
+.bi-person-vcard,
+.bi-chat-dots,
 .bi-briefcase,
-.bi-three-dots, 
-.bi-bandaid-fill{
+.bi-three-dots,
+.bi-bandaid-fill {
     margin-top: 10px;
     width: 50%;
     height: auto;
@@ -125,27 +142,27 @@ nav{
 
 
 .bi-card-list,
-.bi-plus-circle-fill{
+.bi-plus-circle-fill {
     margin-top: 20px;
     width: 40%;
 }
 
-.card-user:hover .bi-diagram-3, 
+.card-user:hover .bi-diagram-3,
 .card-user:hover .bi-gear,
-.card-user:hover .bi-person-vcard, 
-.card-user:hover .bi-chat-dots, 
+.card-user:hover .bi-person-vcard,
+.card-user:hover .bi-chat-dots,
 .card-user:hover .bi-briefcase,
 .card-user:hover .bi-three-dots,
 .card-user:hover .bi-bandaid-fill,
 .card-user:hover .bi-card-list,
-.card-user:hover .bi-plus-circle-fill{
+.card-user:hover .bi-plus-circle-fill {
     fill: goldenrod;
     color: goldenrod;
     margin: 25px;
     transition: all 0.75s;
 }
 
-.card-user:hover .text-cards-user{
+.card-user:hover .text-cards-user {
     visibility: hidden;
     transition: all 0.1s;
 }
@@ -154,4 +171,35 @@ Link {
     text-decoration: none;
 }
 
+.button {
+    margin-top: 20px;
+    text-align: center;
+}
 
+.user-panel {
+    padding: -20px;
+}
+
+#user-panel {
+    margin-top: -50px;
+}
+
+footer {
+    background-color: rgb(24, 34, 23);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    bottom: 0;
+    top: 200px;
+    width: 100%;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const FormProductRegister = () => {
     return (
         <>
-            <div class="container">
+            <div class="container main-form-products">
                 <div className="row justify-content-center">
                     <div className="col-6">
                         <h2>Formulário de Cadastro de produto</h2>
@@ -34,8 +34,10 @@ const FormProductRegister = () => {
                                 <label for="valorInicial">Valor Inicial:</label>
                                 <input type="text" class="form-control" id="valorInicial" placeholder="Digite o valor inicial" name="valorInicial" />
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <div className="button">
+                                <button type="submit" class="btn btn-success">Enviar</button>
+                                <button type="submit" class="btn btn-danger">Limpar</button>
+                            </div>
                         </form>
                     </div>
                 </div>

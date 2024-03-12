@@ -11,29 +11,29 @@ const ProductsPanel = () => {
     const [typeAction, setTypeAction] = useState("")
 
     function activeCard(type) {
-       setTypeAction(()=>{
-        return type
-       })
+        setTypeAction(() => {
+            return type
+        })
     }
 
-    useEffect(() => {}, [typeAction]); 
+    useEffect(() => { }, [typeAction]);
 
     return (
         <>
             <div className="container user-panel">
-                <div className="row justify-content-center">
+                <div className="row justify-content-center" id="user-panel">
                     <div className="col-2">
-                        <ProductsRegister  onClick={() => activeCard("Register")}/>
+                        <ProductsRegister onClick={() => activeCard("Register")} />
                     </div>
-                    
+
                     <div className="col-2">
-                        <ProductsList  onClick={() => activeCard("List")}/>
+                        <ProductsList onClick={() => activeCard("List")} />
                     </div>
-                </div>                
+                </div>
             </div>
-            
-                <MainProducts type={typeAction} ></MainProducts>
-           
+
+            <MainProducts type={typeAction} ></MainProducts>
+
         </>
     )
 }

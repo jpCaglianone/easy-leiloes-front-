@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { Table, Button } from 'react-bootstrap';
-// import { PencilSquare, XSquare } from 'react-bootstrap-icons';
 
 const TableListProducts = () => {
     // const [items, setItems] = useState([]);

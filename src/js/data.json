@@ -1,0 +1,11 @@
+{
+    "timestamp": "2024-03-10T15:20:30",
+    "statusCode": 200,
+    "status": "OK",
+    "message": "User fetched successfully",
+    "data": {
+         "name": "Joao",
+         "password":123,
+         "email" : "jp_caglianone@yahoo.com.br" 
+     }
+  }
