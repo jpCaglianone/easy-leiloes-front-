@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import listCharge from "../../js/listCharge"
 
 const TableListProducts = () => {
-    // const [items, setItems] = useState([]);
+    const [products, setProducts] = useState([]);
 
-    // useEffect(() => {
-    //     axios.get('')
-    //         .then(response => {
-    //             setItems(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Houve um erro ao buscar os dados!', error);
-    //         });
-    // }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await listCharge();
+                if (data && data.data && data.data.products) {
+                    setProducts(data.data.products);
+                } else {
+                    console.error('Os dados retornados não contêm a lista de produtos.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar os produtos:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
+
+    
     return (
         <table>
             <thead>
@@ -27,24 +36,19 @@ const TableListProducts = () => {
                 </tr>
             </thead>
             <tbody>
-                {/* {items.map((item, index) => (
+                {products.map((products, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{item.nome}</td>
-                        <td>{item.descricao}</td>
-                        <td>{item.modelo}</td>
-                        <td>{item.especificacoes}</td>
-                        <td>{item.valorInicial}</td>
+                        <td>{products.name}</td>
+                        <td>{products.description}</td>
+                        <td>{products.model}</td>
+                        <td>{products.specifications}</td>
+                        <td>{0}</td>
                         <td>
-                            <Button variant="outline-primary" size="sm" className="mr-2">
-                                <PencilSquare />
-                            </Button>
-                            <Button variant="outline-danger" size="sm">
-                                <XSquare />
-                            </Button>
+                            
                         </td>
                     </tr>
-                ))} */}
+                ))}
             </tbody>
         </table>
     );
