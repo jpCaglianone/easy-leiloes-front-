@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import listCharge from "../../js/listCharge"
+import listCharge from "../../js/listCharge";
+import { Link } from 'react-router-dom';
+import "../../css/table.css";
 
 const TableListProducts = () => {
     const [products, setProducts] = useState([]);
@@ -13,6 +15,9 @@ const TableListProducts = () => {
                 } else {
                     console.error('Os dados retornados não contêm a lista de produtos.');
                 }
+
+                // 
+
             } catch (error) {
                 console.error('Erro ao buscar os produtos:', error);
             }
@@ -21,36 +26,54 @@ const TableListProducts = () => {
         fetchData();
     }, []);
 
-    
+    function deleteItem(productName) {
+        if (window.confirm("Deseja realmente deletar esse item?")) {
+            const updatedProducts = products.filter(item => item.name !== productName);
+            setProducts(updatedProducts);
+            alert("Produto excluído");
+            // TODO: Aqui tem que ser enviada uma requisição
+        } else {
+            alert("Cancelar");
+        }
+    }
+
+    function handleClick(product) {
+        sessionStorage.setItem('product', JSON.stringify(product));
+    }
+
+    function clearSessionStorage() {
+        sessionStorage.clear();
+    }
+
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Modelo</th>
-                    <th>Especificações</th>
-                    <th>Valor Inicial</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {products.map((products, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{products.name}</td>
-                        <td>{products.description}</td>
-                        <td>{products.model}</td>
-                        <td>{products.specifications}</td>
-                        <td>{0}</td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className="row">
+            {products.map((product, index) => (
+                <div key={index} className="col-md-4 mb-4">
+                    <div className="card shadow bg-light">
+                        {/* Aqui você pode adicionar a imagem ilustrativa */}
+                        <img src={product.image} className="card-img-top" alt={product.name} />
+                        <div className="card-body">
+                            <h5 className="card-title">{product.name}</h5>
+                            <p className="card-text">{product.description}</p>
+                            <p className="card-text">Modelo: {product.model}</p>
+                            <p className="card-text">Especificações: {product.specifications}</p>
+                            <p className="card-text">Valor Inicial: {product.initialValue}</p>
+                            <div className="text-center">
+                                <Link
+                                    to="/newAuction"
+                                    onClick={() => handleClick(product)}
+                                    className="btn btn-success mr-2"
+                                >
+                                    Criar leilão
+                                </Link>
+                                <button className="btn btn-primary mr-2">Editar</button>
+                                <button className="btn btn-danger">Excluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
     );
 };
 

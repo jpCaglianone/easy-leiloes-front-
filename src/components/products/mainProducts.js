@@ -4,11 +4,11 @@ import TableListProducts from "./tableListProducts";
 const MainProducts = (props) => {
 
     if (props.type === "Register") {
-        return (<FormProductRegister/>)
+        return (<FormProductRegister />)
     }
 
     else if (props.type === "List") {
-        return (<TableListProducts/>)
+        return (<TableListProducts />)
     }
 
     else {
