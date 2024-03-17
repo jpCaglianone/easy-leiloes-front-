@@ -1,42 +1,69 @@
 import "../../css/styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from 'axios';
+import React, { useState } from 'react';
 
 const FormProductRegister = () => {
+    const [inputDatas, setInputDatas] = useState({
+        name: "",
+        description: "",
+        model: "",
+        specifications: ""
+    });
+
+    function sendRegister(e) {
+        e.preventDefault();
+        for (let i in inputDatas) {
+            if (inputDatas[i] === "") {
+                alert("Todos os campos do formulário são obrigatórios!")
+                return false;
+            }
+        }
+    }
+
+    function clearInputs() {
+        setInputDatas({
+            name: "",
+            description: "",
+            model: "",
+            specifications: ""
+        });
+    }
+
+    function handleChange(e) {
+        setInputDatas({ ...inputDatas, [e.target.name]: e.target.value });
+    }
+
     return (
         <>
-            <div class="container main-form-products">
+            <div className="container main-form-products">
                 <div className="row justify-content-center">
                     <div className="col-6">
                         <h2>Formulário de Cadastro de produto</h2>
                         <form>
-                            <div class="form-group">
-                                <label for="nome">Nome:</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="nome" />
+                            <div className="form-group">
+                                <label htmlFor="name">Nome:</label>
+                                <input type="text" className="form-control" id="name" placeholder="Digite o nome" name="name" value={inputDatas.name} onChange={handleChange} required/>
                             </div>
 
-                            <div class="form-group">
-                                <label for="descricao">Descrição:</label>
-                                <textarea class="form-control" id="descricao" placeholder="Digite a descrição" name="descricao"></textarea>
+                            <div className="form-group">
+                                <label htmlFor="description">Descrição:</label>
+                                <textarea className="form-control" id="description" placeholder="Digite a descrição" name="description" value={inputDatas.description} onChange={handleChange} required></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="modelo">Modelo:</label>
-                                <input type="text" class="form-control" id="modelo" placeholder="Digite o modelo" name="modelo" />
+                            <div className="form-group">
+                                <label htmlFor="model">Modelo:</label>
+                                <input type="text" className="form-control" id="model" placeholder="Digite o modelo" name="model" value={inputDatas.model} onChange={handleChange} required/>
                             </div>
 
-                            <div class="form-group">
-                                <label for="especificacoes">Especificações:</label>
-                                <input type="text" class="form-control" id="especificacoes" placeholder="Digite as especificações" name="especificacoes" />
+                            <div className="form-group">
+                                <label htmlFor="specifications">Especificações:</label>
+                                <input type="text" className="form-control" id="specifications" placeholder="Digite as especificações" name="specifications" value={inputDatas.specifications} onChange={handleChange} required />
                             </div>
 
-                            <div class="form-group">
-                                <label for="valorInicial">Valor Inicial:</label>
-                                <input type="text" class="form-control" id="valorInicial" placeholder="Digite o valor inicial" name="valorInicial" />
-                            </div>
                             <div className="button">
-                                <button type="submit" class="btn btn-success">Enviar</button>
-                                <button type="submit" class="btn btn-danger">Limpar</button>
+                                <button type="submit" className="btn btn-success" onClick={sendRegister}>Enviar</button>
+                                <button type="button" className="btn btn-danger" onClick={clearInputs}>Limpar</button>
                             </div>
                         </form>
                     </div>

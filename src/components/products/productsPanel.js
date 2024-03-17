@@ -8,6 +8,7 @@ import "../../css/styles.css";
 const ProductsPanel = () => {
 
 
+
     const [typeAction, setTypeAction] = useState("")
 
     function activeCard(type) {
