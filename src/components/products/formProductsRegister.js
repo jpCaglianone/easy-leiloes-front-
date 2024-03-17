@@ -8,7 +8,8 @@ const FormProductRegister = () => {
         name: "",
         description: "",
         model: "",
-        specifications: ""
+        specifications: "",
+        imageUrl:"https://i.imgur.com/Cd03Oqm.jpg"
     });
 
     function sendRegister(e) {
@@ -19,6 +20,18 @@ const FormProductRegister = () => {
                 return false;
             }
         }
+        sendRequest();
+        clearInputs();
+    }
+
+    function sendRequest() {
+        axios.post('http://localhost:8080/auction-api/product', inputDatas)
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => {
+            console.error(`Erro na requisição: ${error}`);
+        });
     }
 
     function clearInputs() {
@@ -60,6 +73,17 @@ const FormProductRegister = () => {
                                 <label htmlFor="specifications">Especificações:</label>
                                 <input type="text" className="form-control" id="specifications" placeholder="Digite as especificações" name="specifications" value={inputDatas.specifications} onChange={handleChange} required />
                             </div>
+
+                            <div className="form-group">
+                                <label htmlFor="imageUrl">URl da Imagem:</label>
+                                <input type="text" 
+                                className="form-control" 
+                                id="imageUrl" 
+                                placeholder="Digite as especificações" 
+                                name="imageUrl" 
+                                value={inputDatas.imageUrl} 
+                                onChange={handleChange} required disabled />
+                            </div> 
 
                             <div className="button">
                                 <button type="submit" className="btn btn-success" onClick={sendRegister}>Enviar</button>
