@@ -16,7 +16,7 @@ const TableListProducts = () => {
 
     useEffect(() => {
 
-     clearSessionStorage()ç
+     clearSessionStorage();
 
 
         axios.get('http://localhost:8080/auction-api/product')
