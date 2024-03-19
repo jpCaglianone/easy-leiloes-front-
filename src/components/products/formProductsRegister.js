@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const FormProductRegister = () => {
+
     const [inputDatas, setInputDatas] = useState({
         name: "",
         description: "",
