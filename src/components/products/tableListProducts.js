@@ -71,7 +71,7 @@ const TableListProducts = () => {
                                             Criar leilão
                                         </Link>
                                         <button className="btn btn-primary mr-2">Editar</button>
-                                        <button className="btn btn-danger">Excluir</button>
+                                        <button className="btn btn-danger" onClick={deleteItem}>Excluir</button>
                                     </div>
                                 </div>
                             </div>
