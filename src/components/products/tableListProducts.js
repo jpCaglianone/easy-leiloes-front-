@@ -12,12 +12,9 @@ const TableListProducts = () => {
         sessionStorage.clear();
     }
 
-
-
     useEffect(() => {
 
-     clearSessionStorage();
-
+        clearSessionStorage();
 
         axios.get('http://localhost:8080/auction-api/product')
             .then((response) => {
@@ -78,9 +75,9 @@ const TableListProducts = () => {
                         </div>
                     ))}
                 </div>
-                </div>
-                </div>
-                );
+            </div>
+        </div>
+    );
 };
 
-                export default TableListProducts;
+export default TableListProducts;

@@ -1,10 +1,11 @@
 import Top from "../header/top"
-import UserProducts from "./userProducts";
+import UserAllAuctions from "./userAllAuctions";
 import UserAuctions from "./userAuctions";
 import UserAccount from "./userAccount";
 import UserSettings from "./userSettings";
-import UserAllAuctions from "./userAllAuctions"
 import UserNotifications from "./userNotifications";
+import UserProducts from "./userProducts";
+import Footer from "../footer"
 
 import "../../css/styles.css";
 
@@ -38,6 +39,7 @@ const UserPanel = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

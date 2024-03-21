@@ -1,0 +1,10 @@
+{"transform" : {
+    "^.+\\.js$": "babel-jest",
+    "^.+\\.jsx$": "babel-jest",
+    "^.+\\.css$": "jest-transform-stub",
+    "^.+\\.jpg$": "jest-transform-stub",
+    "^.+\\.png$": "jest-transform-stub"
+  },
+  "moduleNameMapper": {
+    "axios": "jest-transform-stub"
+  }}

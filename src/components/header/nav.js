@@ -28,59 +28,16 @@ const Nav = () => {
                 </Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/teste">
+                <a className="nav-link" href="/">
                   Sobre nós
                 </a>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/teste">
+                <a className="nav-link" href="/">
                   Nossos serviços
                 </a>
               </li>
-              <li className="nav-item dropdown ">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="/teste"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown link
-                </a>
-                <ul className="dropdown-menu ">
-                  <li >
-                    <a className="dropdown-item" href="/teste">
-                      Action
-                    </a>
-                  </li>
-                  <li >
-                    <a className="dropdown-item" href="/teste">
-                      Another action
-                    </a>
-                  </li>
-                  <li >
-                    <a className="dropdown-item" href="/teste">
-                      Something else here
-                    </a>
-                  </li>
-                  <li className='bg-white'>
-                    <nav className="navbar bg-body-tertiary">
-                      <div className="container-fluid">
-                        <form className="d-flex" role="search">
-                          <input
-                            className="form-control me-2 bg-white"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search" />
-                          <button className="btn btn-outline-success" type="submit">
-                            Search
-                          </button>
-                        </form>
-                      </div>
-                    </nav>
-                  </li>
-                </ul>
-              </li>
+             
             </ul>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Register from './components/auth/register';
 import Login from './components/auth/login'; 
 import ProductsPanel from "./components/products/productsPanel"
 import NewAuction from "./components/auction/newAuction"
+import AllAuctions from './components/auction/allAuctions';
 
 import UserPanel from './components/user/userPanel';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/userPanel" element={<UserPanel />} />
           <Route path="/userPanel/productsPanel" element={<ProductsPanel/>}></Route>
           <Route path="/newAuction" element={<NewAuction/>}></Route>
+          <Route path="/userPanel/allAuctionsPanel" element={<AllAuctions/>}></Route>
         </Routes>
     </Router>
   );

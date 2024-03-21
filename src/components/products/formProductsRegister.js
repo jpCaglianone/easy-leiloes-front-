@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 
+
 const FormProductRegister = () => {
 
     const [inputDatas, setInputDatas] = useState({
@@ -57,22 +58,53 @@ const FormProductRegister = () => {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="name">Nome:</label>
-                                <input type="text" className="form-control" id="name" placeholder="Digite o nome" name="name" value={inputDatas.name} onChange={handleChange} required/>
+                                <input type="text" 
+                                className="form-control" 
+                                id="name" 
+                                placeholder="Digite o nome" 
+                                name="name" 
+                                value={inputDatas.name} 
+                                onChange={handleChange} 
+                                data-testid="name"
+                                required/>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="description">Descrição:</label>
-                                <textarea className="form-control" id="description" placeholder="Digite a descrição" name="description" value={inputDatas.description} onChange={handleChange} required></textarea>
+                                <textarea className="form-control" 
+                                id="description" 
+                                placeholder="Digite a descrição" 
+                                name="description" 
+                                value={inputDatas.description} 
+                                onChange={handleChange} 
+                                data-testid="description"
+                                required></textarea>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="model">Modelo:</label>
-                                <input type="text" className="form-control" id="model" placeholder="Digite o modelo" name="model" value={inputDatas.model} onChange={handleChange} required/>
+                                <input type="text" 
+                                className="form-control" 
+                                id="model" 
+                                placeholder="Digite o modelo" 
+                                name="model" 
+                                value={inputDatas.model} 
+                                onChange={handleChange} 
+                                data-testid="model"
+                                required/>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="specifications">Especificações:</label>
-                                <input type="text" className="form-control" id="specifications" placeholder="Digite as especificações" name="specifications" value={inputDatas.specifications} onChange={handleChange} required />
+                                <input type="text" 
+                                className="form-control" 
+                                id="specifications" 
+                                placeholder="Digite as especificações" 
+                                name="specifications" 
+                                value={inputDatas.specifications} 
+                                onChange={handleChange} 
+                                data-testid="specifications"
+                                required />
                             </div>
 
                             <div className="form-group">
@@ -83,19 +115,16 @@ const FormProductRegister = () => {
                                 placeholder="Digite as especificações" 
                                 name="imageUrl" 
                                 value={inputDatas.imageUrl} 
-                                onChange={handleChange} required disabled />
-                            </div> 
-
-                            <div className="button">
-                                <button type="submit" className="btn btn-success" onClick={sendRegister}>Enviar</button>
-                                <button type="button" className="btn btn-danger" onClick={clearInputs}>Limpar</button>
+                                onChange={handleChange} 
+                                data-testid="imageUrl"
+                                required disabled />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default FormProductRegister;
