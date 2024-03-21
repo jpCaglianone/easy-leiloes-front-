@@ -75,7 +75,7 @@ nav {
 
 #custom-register {
     margin-top: 75px;
-    background-color: rgba(38, 43, 30, 0.25);
+    background-color: rgba(255, 255, 255, 0.1);
     width: 40%;
     border-radius: 20px;
 }
@@ -212,4 +212,12 @@ footer a:hover {
 .input{
     width: 75px;
     margin-left: 10px;
+}
+
+.alert-user-register{
+    margin-top: 200px;
+}
+.alert-user-register > h1{
+    padding: 20px;
+    border-radius: 10px;
 }
