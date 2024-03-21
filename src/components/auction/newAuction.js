@@ -56,8 +56,6 @@ const NewAuction = () => {
     }
 
     return (
-
-
         <div className="row">
             <div className='col-3'>
                 <div className="card shadow bg-light">
@@ -72,7 +70,8 @@ const NewAuction = () => {
                                 type='number'
                                 className='input'
                                 onChange={(event) => setTimeAuction(event.target.value)}
-                                disabled={isDisabled} />
+                                disabled={isDisabled}
+                                data-testid="timeAuction" />
                         </p>
 
                         <p className="card-text">Valor Inicial: R$
@@ -81,7 +80,8 @@ const NewAuction = () => {
                                 value={maskVal}
                                 onChange={(event) => maskValue(event)}
                                 disabled={isDisabled}
-                                id="value" /> ,00
+                                id="value"
+                                data-testid="value" /> ,00
                         </p>
                         {auctionCreated === false ?
                             <>
@@ -98,18 +98,13 @@ const NewAuction = () => {
                                     <button className='btn btn-warning'>Meus leilões</button>
                                     <button className='btn btn-warning'>Pagina inicial</button>
                                 </div>
-
-
                             </>
                         }
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     );
-};
+}
 
 export default NewAuction;
