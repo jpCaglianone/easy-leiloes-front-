@@ -14,36 +14,36 @@ const FormProductRegister = () => {
         imageUrl:"https://i.imgur.com/Cd03Oqm.jpg"
     });
 
-    function sendRegister(e) {
-        e.preventDefault();
-        for (let i in inputDatas) {
-            if (inputDatas[i] === "") {
-                alert("Todos os campos do formulário são obrigatórios!")
-                return false;
-            }
-        }
-        sendRequest();
-        clearInputs();
-    }
+    // function sendRegister(e) {
+    //     e.preventDefault();
+    //     for (let i in inputDatas) {
+    //         if (inputDatas[i] === "") {
+    //             alert("Todos os campos do formulário são obrigatórios!")
+    //             return false;
+    //         }
+    //     }
+    //     sendRequest();
+    //     clearInputs();
+    // }
 
-    function sendRequest() {
-        axios.post('http://localhost:8080/auction-api/product', inputDatas)
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.error(`Erro na requisição: ${error}`);
-        });
-    }
+    // function sendRequest() {
+    //     axios.post('http://localhost:8080/auction-api/product', inputDatas)
+    //     .then((response) => {
+    //         console.log(response)
+    //     })
+    //     .catch((error) => {
+    //         console.error(`Erro na requisição: ${error}`);
+    //     });
+    // }
 
-    function clearInputs() {
-        setInputDatas({
-            name: "",
-            description: "",
-            model: "",
-            specifications: ""
-        });
-    }
+    // function clearInputs() {
+    //     setInputDatas({
+    //         name: "",
+    //         description: "",
+    //         model: "",
+    //         specifications: ""
+    //     });
+    // }
 
     function handleChange(e) {
         setInputDatas({ ...inputDatas, [e.target.name]: e.target.value });
