@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const FormLogin = () => {
 
-  let url = "https://a5436e77-1d77-4583-8d79-1a0ec14f8b4a-00-13osuyguj3pdp.janeway.replit.dev/";
+  let url = "http://localhost:8087"
 
   const [buttonActive, setButtonActive] = useState (false)
 
@@ -10,7 +11,7 @@ const FormLogin = () => {
     email : "",
     password : ""
   });
-  
+
   const sendData = (event) => {
     let data = event.target.value
     let id = event.target.id
@@ -38,19 +39,17 @@ const FormLogin = () => {
   }
 
   const sendRequest = async () => {
-    try {
-        const response = await fetch(`${url}register`, {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-        const data = await response.json();
-        console.log(data.status);
-        return true;
-    } catch (error) {
-        console.error('Erro:', error);
-    }
-};
+    const username = `${formData.email}`;
+    const password = `${formData.password}`;
+    const base64 = btoa(`${username}:${password}`);
+    const instance = axios.create({
+      baseURL: `${url}`,
+      headers: { 'Authorization': `Basic ${base64}` }
+    });
+    instance.get('/easyAuth/auth/login')
+    .then(response => console.log(response.data))
+    .catch(error => console.error('Erro na requisição:', error));
+  };
 
 
   return (
