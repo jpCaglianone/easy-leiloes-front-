@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../App";
+import UserPanel from "../user/userPanel";
 
 const FormLogin = () => {
 
   let url = "http://localhost:8087"
 
   const [buttonActive, setButtonActive] = useState (false)
+  
+  const { __secTK, set__secTK } = useContext(UserContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
+
+  useEffect(() => {}, [userLogged]); 
 
   const [formData, setFormData] = useState({
     email : "",
     password : ""
   });
 
+
   const sendData = (event) => {
     let data = event.target.value
     let id = event.target.id
 
     setFormData((prevValue) => {
-  
-      console.log(prevValue)
       let newValue = { ...prevValue, [id]: data };
       return newValue;
     })
@@ -47,11 +54,14 @@ const FormLogin = () => {
       headers: { 'Authorization': `Basic ${base64}` }
     });
     instance.get('/easyAuth/auth/login')
-    .then(response => console.log(response.data))
+    .then(response => {
+      set__secTK(response.data.data.TokenResponse.token)
+      setUserLogged(response.data.data.TokenResponse.name)
+    })
     .catch(error => console.error('Erro na requisição:', error));
   };
 
-
+if (userLogged === null){
   return (
     <div className="container mt-5" id='custom-login'>
       <h2>Login</h2>
@@ -89,6 +99,11 @@ const FormLogin = () => {
 
       </form>
     </div>
-  )
+  )}
+  else {
+    return(
+      <UserPanel />
+    )
+  }
 }
 export default FormLogin;
