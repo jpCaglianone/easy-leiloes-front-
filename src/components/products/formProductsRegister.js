@@ -52,13 +52,14 @@ const FormProductRegister = () => {
         e.preventDefault()
         const url = 'http://localhost:8080/auction-api/product'; 
         const data = inputDatas;
-        const token = __secTK; 
+        const token = __secTK.trim(); 
         
         const config = {
             headers: { 'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json' }
         };
-
+        console.log(data)
+        console.log(token)
         try {
             await axios.post(url, data, config)
             .then(response => console.log(response.data));
