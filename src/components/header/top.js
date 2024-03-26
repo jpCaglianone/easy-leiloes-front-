@@ -5,14 +5,17 @@ import '../../css/styles.css'
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 
+
 const Top = () => {
 
   const { __secTK, set__secTK } = useContext(UserContext);
   const { userLogged, setUserLogged } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
 
   function loggout () {
     setUserLogged(null)
     set__secTK(null)
+    setUserId(null)
   }
 
   return (

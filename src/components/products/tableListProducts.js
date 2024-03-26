@@ -54,7 +54,6 @@ const TableListProducts = () => {
     }
 
 
-
     return (
         <div className='container'>
             <div className='col-12 d-flex justify-content-center flex-wrap'>
@@ -70,7 +69,6 @@ const TableListProducts = () => {
                                     <p className="card-text">{product.description}</p>
                                     <p className="card-text">Modelo: {product.model}</p>
                                     <p className="card-text">Especificações: {product.specifications}</p>
-                                    <p className="card-text">Valor Inicial: {product.initialValue}</p>
                                     <div className="text-center">
                                         <Link
                                             to="/newAuction"

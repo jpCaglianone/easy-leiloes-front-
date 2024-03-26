@@ -2,6 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import "../../css/styles.css";
 import axios from 'axios';
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import { useNavigate } from 'react-router-dom';
 
 const NewAuction = () => {
 
@@ -9,8 +12,18 @@ const NewAuction = () => {
     const [timeAuction, setTimeAuction] = useState();
     const [auctionCreated, setAuctionCreated] = useState(false)
     const [isDisabled, setIsDisabed] = useState(false)
+    const { userId, setUserId } = useContext(UserContext);
+    const { __secTK } = useContext(UserContext)
+    const token = __secTK.trim();
+    const navigate = useNavigate();
 
-    
+    const config = {
+        headers: {
+            'Authorization': `${token}`,
+            'Content-Type': 'application/json'
+        }
+    };
+
     let actualDate = new Date();
 
     const product = JSON.parse(sessionStorage.getItem('product'));
@@ -19,26 +32,24 @@ const NewAuction = () => {
 
         let inputDatas = ({
             "productId": product.id,
-            "auctionOwnerUuid": "1", //TODO: PARA TESTES, RETIRAR
-            "initialPrice": maskVal,
+            "auctionOwnerUuid": userId,
             "auctionStartDate": actualDate,
             "auctionEndDate": new Date(actualDate.setMinutes(actualDate.getMinutes() + Number(timeAuction))).toISOString(),
+            "initialPrice" : maskVal,
             "auctionStatus": "ACTIVE"
 
         })
-        console.log(inputDatas)
-
-        axios.post('http://localhost:8080/auction-api/auction', inputDatas)
+        axios.post('http://localhost:8080/auction-api/auction', inputDatas, config)
             .then((response) => {
                 console.log(response)
-            })
+                setIsDisabed(true)
+                setAuctionCreated(true)
+        
+            }     
+            )
             .catch((error) => {
                 console.error(`Erro na requisição: ${error}`);
             });
-
-
-        setIsDisabed(true)
-        setAuctionCreated(true)
 
     }
 
@@ -53,6 +64,10 @@ const NewAuction = () => {
             document.getElementById("value").value = ""
             setMaskVal(parseFloat(currentValue))
         }
+    }
+
+    function userPanelRedirect () {
+        navigate("/userPanel")
     }
 
     return (
@@ -90,13 +105,15 @@ const NewAuction = () => {
                                     <button className='btn btn-danger'>Cancelar</button>
                                 </div>
                             </>
-                            : //senão
+                            : 
                             <>
                                 <div className="text-center">
                                     <p className='bg-success h3'> Leilão criado! </p>
 
                                     <button className='btn btn-warning'>Meus leilões</button>
-                                    <button className='btn btn-warning'>Pagina inicial</button>
+                                
+                                    <button className='btn btn-warning' onClick={userPanelRedirect}>Meu painel</button>
+                                
                                 </div>
                             </>
                         }

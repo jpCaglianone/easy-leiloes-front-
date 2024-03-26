@@ -5,14 +5,15 @@ import UserAccount from "./userAccount";
 import UserSettings from "./userSettings";
 import UserNotifications from "./userNotifications";
 import UserProducts from "./userProducts";
-
+import Top from '../header/top'
+import Footer from '../footer';
 import "../../css/styles.css";
 
 
 const UserPanel = () => {
     return (
         <>
-            
+            <Top></Top>
             <div className="container user-panel">
                 <div className="row justify-content-center">
                     <div className="col-3">
@@ -38,6 +39,7 @@ const UserPanel = () => {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </>
     )
 }

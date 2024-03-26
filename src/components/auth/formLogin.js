@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useContext, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../App";
-import UserPanel from "../user/userPanel";
+import { Link } from "react-router-dom";
 
 const FormLogin = () => {
 
   let url = "http://localhost:8087"
 
-  const [buttonActive, setButtonActive] = useState (false)
-  
+  const [buttonActive, setButtonActive] = useState(false)
+
   const { __secTK, set__secTK } = useContext(UserContext);
   const { userLogged, setUserLogged } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
+  const navigate = useNavigate()
 
-  useEffect(() => {}, [userLogged]); 
+  useEffect(() => { }, [userLogged]);
 
   const [formData, setFormData] = useState({
-    email : "",
-    password : ""
+    email: "",
+    password: ""
   });
 
 
@@ -30,17 +33,19 @@ const FormLogin = () => {
       return newValue;
     })
   }
-  
+
   async function sendFormLogin(event) {
     event.preventDefault()
-    setButtonActive (()=> {return true}); // desabilita o botao ate recer a promise
-   
+    setButtonActive(() => { return true }); // desabilita o botao ate recer a promise
+
     if (sendRequest()) {
-      const interval = setInterval(()=>{setButtonActive (()=> {
-        clearInterval(interval)
-        return false
-      });},1500)
-      
+      const interval = setInterval(() => {
+        setButtonActive(() => {
+          clearInterval(interval)
+          return false
+        });
+      }, 1500)
+
     }
 
   }
@@ -54,14 +59,20 @@ const FormLogin = () => {
       headers: { 'Authorization': `Basic ${base64}` }
     });
     instance.get('/easyAuth/auth/login')
-    .then(response => {
-      set__secTK(response.data.data.TokenResponse.token)
-      setUserLogged(response.data.data.TokenResponse.name)
-    })
-    .catch(error => console.error('Erro na requisição:', error));
+      .then(response => {
+        set__secTK(response.data.data.TokenResponse.token)
+        setUserLogged(response.data.data.TokenResponse.name)
+        setUserId(response.data.data.TokenResponse.userId)
+        userPanelRedirect()
+      })
+      .catch(error => console.error('Erro na requisição:', error));
   };
 
-if (userLogged === null){
+
+  function userPanelRedirect() {
+    navigate("/userPanel")
+  }
+
   return (
     <div className="container mt-5" id='custom-login'>
       <h2>Login</h2>
@@ -72,8 +83,8 @@ if (userLogged === null){
             type="email"
             className="form-control"
             id="email"
-            onChange={sendData} 
-            data-testid="email"/>
+            onChange={sendData}
+            data-testid="email" />
         </div>
         <div className="form-group">
           <label>Senha:</label>
@@ -82,28 +93,24 @@ if (userLogged === null){
             className="form-control"
             id="password"
             data-testid="password"
-            onChange={sendData} 
-            />
+            onChange={sendData}
+          />
         </div>
         <div className="form-group">
           <a href='/rememberPassword'>Esqueci minha senha</a>
           <button
-            id="btn-SendForm" 
+            id="btn-SendForm"
             type="submit"
             className="btn btn-primary"
             onClick={sendFormLogin}
-            disabled = {buttonActive}>
+            disabled={buttonActive}>
             Entrar
           </button>
         </div>
 
       </form>
     </div>
-  )}
-  else {
-    return(
-      <UserPanel />
-    )
-  }
+  )
+
 }
 export default FormLogin;
