@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import "../../css/table.css";
 import "../../css/styles.css";
 import axios from 'axios';
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 
 const TableListProducts = () => {
+
+    const { __secTK } = useContext(UserContext)
     const [products, setProducts] = useState([]);
+    const token = __secTK.trim();
 
     const clearSessionStorage = () => {
         sessionStorage.clear();
@@ -16,7 +21,14 @@ const TableListProducts = () => {
 
         clearSessionStorage();
 
-        axios.get('http://localhost:8080/auction-api/product')
+        const config = {
+            headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
+
+        axios.get('http://localhost:8080/auction-api/product',config)
             .then((response) => {
                 setProducts(response.data.data.Products)
             })

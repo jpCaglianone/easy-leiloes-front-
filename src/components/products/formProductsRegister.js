@@ -4,11 +4,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useContext } from "react";
 import { UserContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const FormProductRegister = () => {
 
-    const {__secTK} = useContext(UserContext)
-    
+    const { __secTK } = useContext(UserContext)
+
     const [inputDatas, setInputDatas] = useState({
         name: "",
         description: "",
@@ -39,33 +40,37 @@ const FormProductRegister = () => {
     //     });
     // }
 
-    // function clearInputs() {
-    //     setInputDatas({
-    //         name: "",
-    //         description: "",
-    //         model: "",
-    //         specifications: ""
-    //     });
-    // }
+    function clearInputs() {
+        setInputDatas({
+            name: "",
+            description: "",
+            model: "",
+            specifications: ""
+        });
+    }
 
     const sendData = async (e) => {
         e.preventDefault()
-        const url = 'http://localhost:8080/auction-api/product'; 
+        const url = 'http://localhost:8080/auction-api/product';
         const data = inputDatas;
-        const token = __secTK.trim(); 
-        
+        const token = __secTK.trim();
+
         const config = {
-            headers: { 'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json' }
+            headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+            }
         };
-        console.log(data)
-        console.log(token)
         try {
             await axios.post(url, data, config)
-            .then(response => console.log(response.data));
+            window.alert("Produto registrado com sucesso!")
+            clearInputs()
+               
         } catch (error) {
             console.error(error);
         }
+
+       
     }
 
     function handleChange(e) {
@@ -166,6 +171,8 @@ const FormProductRegister = () => {
             </div>
         </>
     );
+
+
 }
 
 export default FormProductRegister;
