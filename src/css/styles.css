@@ -254,3 +254,7 @@ footer a:hover {
         slideInFromRight 1.25s ease-out forwards,
         fadeIn 1.75s ease-in forwards;
 }
+
+.min-width-card {
+    min-width: 300px;}
+  

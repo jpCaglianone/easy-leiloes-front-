@@ -71,13 +71,13 @@ const allOtherAuctions = () => {
         fetchAuctions();
     }, []);
 
-
+if   (cardAuctions.lenght !== 0) {
     return (
         <>
             <div className='container'>
                 <div className='col-12 d-flex justify-content-center flex-wrap'>
                     <div className="row gy-5">
-                        cardAuctions.lenght !== 0 ?
+                      
                         {cardAuctions.map((auction, index) => (
                             <div key={index} className="col-6 d-flex justify-content-center flex-wrap">
 
@@ -97,14 +97,19 @@ const allOtherAuctions = () => {
                                     </div>
                                 </div>
                             </div> 
-                        ))} :
-                        <h1 className='text-danger'>Não há leiloes ativos no momento</h1>
+                        ))} 
+                        
                     </div>
                 </div>
             </div>
 
         </>
-    );
+
+    );}
+else {
+    return(
+        <h1 className='text-danger'>Não há leiloes ativos no momento</h1>)
+}
 };
 
 export default allOtherAuctions;

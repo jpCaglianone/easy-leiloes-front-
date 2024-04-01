@@ -9,8 +9,6 @@ import AllAuctions from './components/auction/allAuctions';
 import AllOtherAuctions from './components/auction/allOtherAuctions';
 import { useContext, useState } from 'react';
 import UserPanel from './components/user/userPanel';
-
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -29,6 +27,7 @@ function App() {
       set__UrlTK(__secTK.slice(10,20));
     }
   }, [__secTK]); 
+  
 
 
   return (

@@ -70,7 +70,7 @@ const allAuctions = () => {
 
             <div className='container'>
                 <div className='d-flex justify-content-center flex-wrap'>
-                    <div className="row gy-5">
+                    <div className="row">
                         {cardAuctions.map((auction, index) => (
                             <div key={index} className="col-6 d-flex justify-content-center flex-wrap">
 
