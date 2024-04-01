@@ -53,7 +53,7 @@ const TableListProducts = () => {
         sessionStorage.setItem('product', JSON.stringify(product));
     }
 
-
+if (products.length !== 0){
     return (
         <div className='container'>
             <div className='col-12 d-flex justify-content-center flex-wrap'>
@@ -87,7 +87,10 @@ const TableListProducts = () => {
                 </div>
             </div>
         </div>
-    );
+    );}
+    else {
+        return (<h1 className='text-danger'>Não há leiloes ativos no momento</h1>)
+    }
 };
 
 export default TableListProducts;

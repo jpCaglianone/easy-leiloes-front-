@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import "../../css/table.css";
 import "../../css/styles.css";
@@ -6,15 +8,17 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useNavigate } from 'react-router-dom';
 
-const allAuctions = () => {
+const allOtherAuctions = () => {
     const [auctions, setAuctions] = useState();
     const { userId, setUserId } = useContext(UserContext);
     const { __secTK } = useContext(UserContext)
     const [products, setProducts] = useState([])
+    const [currentPrice, setCurrentPrice] = useState(0)
     const [cardAuctions, setCardAuctions] = useState([])
-    const [currentPrice, setCurrentPrice] = useState()
     const token = __secTK.trim();
     const navigate = useNavigate();
+
+    console.log(token)
 
     const config = {
         headers: {
@@ -52,25 +56,28 @@ const allAuctions = () => {
             }
 
             for (let i in auxAuctions) {
-                for (let j in auxProducts) {
-                    if (auxAuctions[i].productId === auxProducts[j].id) {
+                for (let j in auxProducts){
+                    if(auxAuctions[i].productId === auxProducts[j].id){
                         allInforms.push(Object.assign({}, auxAuctions[i], auxProducts[j]));
                     }
                 }
             }
+            
+            
             setCardAuctions(allInforms)
+           
         };
 
         fetchAuctions();
     }, []);
 
-    if (cardAuctions.length !== 0){
+
     return (
         <>
-
             <div className='container'>
-                <div className='d-flex justify-content-center flex-wrap'>
+                <div className='col-12 d-flex justify-content-center flex-wrap'>
                     <div className="row gy-5">
+                        cardAuctions.lenght !== 0 ?
                         {cardAuctions.map((auction, index) => (
                             <div key={index} className="col-6 d-flex justify-content-center flex-wrap">
 
@@ -82,23 +89,22 @@ const allAuctions = () => {
                                         <p className="card-text">Modelo: {auction.model}</p>
                                         <p className="card-text">Especificações: {auction.specifications}</p>
                                         <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
-                                        <p className="card-text">Preço atual: {currentPrice}</p>
+                                        <p className="card-text">Preço atual:{currentPrice + auction.initialPrice}</p>
+                                        <button className='btn btn-success'>Dar Lance (incremento automatico de 1 real)</button>
                                         <div className="text-center">
 
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            </div> 
+                        ))} :
+                        <h1 className='text-danger'>Não há leiloes ativos no momento</h1>
                     </div>
                 </div>
             </div>
 
         </>
-    );}
-    else {
-        return (<h1 className='text-danger'>Você ainda nao criou um leilão</h1>)
-    }
+    );
 };
 
-export default allAuctions;
+export default allOtherAuctions;

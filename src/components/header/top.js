@@ -4,19 +4,22 @@ import { Link } from 'react-router-dom';
 import '../../css/styles.css'
 import { useContext } from 'react';
 import { UserContext } from '../../App';
-
+import { useNavigate } from 'react-router-dom';
 
 const Top = () => {
 
   const { __secTK, set__secTK } = useContext(UserContext);
   const { userLogged, setUserLogged } = useContext(UserContext);
   const { userId, setUserId } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  function loggout () {
+  function loggout() {
     setUserLogged(null)
     set__secTK(null)
     setUserId(null)
+    navigate("/")
   }
+console.log(__secTK)
 
   return (
     <>
@@ -40,13 +43,22 @@ const Top = () => {
                   <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
                 </svg>
                 <p className='text-custom'>Registrar-se</p>
-
               </Link>
 
-            </div> :
+            </div>
+            :
             <>
-              <h2>Seja bem-vindo, {userLogged}</h2>
-              <h4 style={{"cursor":"pointer"}} onClick={loggout}>Sair</h4>
+
+              <div className="col-2 d-flex align-items-center justify-content-center nav-link nav-custom">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  onClick={loggout}
+                  width="36" height="36" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                  <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+                  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
+                </svg>
+                <p className='text-custom' onClick={loggout} style={{ "cursor": "pointer" }}> Sair </p>
+              </div>
+
             </>
           }
 
@@ -84,6 +96,8 @@ const Top = () => {
         </div>
       </div>
 
+      {userLogged !== null ? <h4 className='d-flex justify-content-center' id="a">Seja bem-vindo, <em><strong> {userLogged} </strong></em></h4> : <p></p>}
+      
     </>
   );
 };

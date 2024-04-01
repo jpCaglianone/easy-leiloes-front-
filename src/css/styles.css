@@ -1,5 +1,7 @@
 body {
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 #logo-container {
@@ -7,7 +9,7 @@ body {
 }
 
 #logo-img {
-    width: 185px;
+    width: 175px;
     height: 150px;
     border-radius: 15px;
 }
@@ -21,7 +23,7 @@ nav {
 }
 
 .navbar {
-    height: 85px;
+    height: 60px;
     background-image: linear-gradient(120deg, RGB(38, 43, 30), rgb(10, 55, 46));
 }
 
@@ -94,6 +96,10 @@ form>div>label {
     margin-top: 25px;
 }
 
+#custom-login>form{
+    margin-bottom: 250px;
+}
+
 /* @media (max-width: 650px) {
     #social-medias{
         display: none;
@@ -103,12 +109,12 @@ form>div>label {
 } */
 
 .user-panel {
-    margin: 100px auto;
+    margin: 50px auto 150px;
 }
 
 .card-user {
     margin: 20px auto;
-    height: 200px;
+    height: 150px;
     background-color: rgba(240, 240, 225, 0.75);
     border-radius: 20px;
     transition: all 0.75s;
@@ -136,10 +142,9 @@ form>div>label {
 .bi-three-dots,
 .bi-bandaid-fill {
     margin-top: 10px;
-    width: 50%;
+    width: 25%;
     height: auto;
 }
-
 
 .bi-card-list,
 .bi-plus-circle-fill {
@@ -158,7 +163,7 @@ form>div>label {
 .card-user:hover .bi-plus-circle-fill {
     fill: goldenrod;
     color: goldenrod;
-    margin: 25px;
+    margin: 50px;
     transition: all 0.75s;
 }
 
@@ -180,19 +185,14 @@ Link {
     padding: -20px;
 }
 
-#user-panel {
-    margin-top: -50px;
-}
-
 footer {
     background-color: rgb(24, 34, 23);
     color: #fff;
     text-align: center;
-    padding: 30px 20px;
-    position: relative;
-    bottom: 0;
-    top: 200px;
+    padding: 15px 20px;
     width: 100%;
+    top: auto;
+    bottom: 0;
 }
 
 footer a {
@@ -220,4 +220,37 @@ footer a:hover {
 .alert-user-register > h1{
     padding: 20px;
     border-radius: 10px;
+}
+
+.bi-person-x{
+    cursor: pointer;
+} 
+
+#a{
+    margin-top: 20px;
+    color:goldenrod;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    animation: 
+        slideInFromRight 1.25s ease-out forwards,
+        fadeIn 1.75s ease-in forwards;
 }

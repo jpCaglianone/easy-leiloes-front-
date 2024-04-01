@@ -19,7 +19,7 @@ const UserAllAuctions = () => {
 
                     <div className="row">
                         <div className="col card-content">
-                            <p className="text-cards-user">Ir para todos os Leilões</p>
+                            <p className="text-cards-user">Meus Leilões</p>
                         </div>
                     </div>
                 </div>

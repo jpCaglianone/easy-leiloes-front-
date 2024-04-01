@@ -1,5 +1,6 @@
 import React from 'react';
 import Top from '../header/top';
+import Nav from '../header/nav';
 import FormLogin from './formLogin';
 import Footer from '../footer';
 
@@ -9,6 +10,7 @@ const Login = () => {
 
     <>
       <Top />
+      <Nav/>
       <FormLogin />
       <Footer />
     </>
