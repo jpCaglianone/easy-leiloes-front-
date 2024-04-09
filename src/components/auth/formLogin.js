@@ -45,9 +45,7 @@ const FormLogin = () => {
           return false
         });
       }, 1500)
-
     }
-
   }
 
   const sendRequest = async () => {
