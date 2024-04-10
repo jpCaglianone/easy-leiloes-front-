@@ -86,8 +86,7 @@ const AllAuctions = () => {
                                         <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
                                         <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
                                         <div className="text-center">
-                                            <button className="btn btn-primary" onClick={() => makeBid(auction.id)} disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}>Dar Lance</button>
-                                        </div>
+                                           </div>
                                     </div>
                                 </div>
                             </motion.div>
