@@ -91,6 +91,10 @@ form>div>label {
     font-family: Georgia, Times, 'Times New Roman', serif;
 }
 
+.card-auction{
+    width: 300px;
+}
+
 #custom-login>form>.form-group>button {
     margin-left: 10%;
     margin-top: 25px;

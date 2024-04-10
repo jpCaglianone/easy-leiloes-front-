@@ -8,9 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import CountdownTimer from './countdownTimer';
 import Top from '../header/top';
 import Footer from '../footer';
+import { motion } from 'framer-motion';
 
 const AllAuctions = () => {
     const { __secTK } = useContext(UserContext);
+    const { userUuid } = useContext(UserContext);
+    const { userId } = useContext(UserContext);
     const [cardAuctions, setCardAuctions] = useState([]);
     const [auctionsWithZeroTime, setAuctionsWithZeroTime] = useState([]);
     const token = __secTK.trim();
@@ -26,10 +29,10 @@ const AllAuctions = () => {
     useEffect(() => {
         const fetchAuctions = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/auction-api/auction', config);
+                const response = await axios.get(`http://localhost:8080/auction-api/auction/other/${userUuid}`, config);
                 const auxAuctions = response.data.data.Auctions;
 
-                const responseProducts = await axios.get('http://localhost:8080/auction-api/product', config);
+                const responseProducts = await axios.get(`http://localhost:8080/auction-api/product/other/${userId}`, config);
                 const auxProducts = responseProducts.data.data.Products;
 
                 const allInforms = auxAuctions.map(auction => {
@@ -61,14 +64,21 @@ const AllAuctions = () => {
         }
     };
 
+    const numCardsPerRow = window.innerWidth < 650 ? 1 : 4; 
+    const cardWidth = `col-lg-${Math.floor(12 / numCardsPerRow)}`;
+
     return (
         <>
-        <Top />
+            <Top />
             <div className='container'>
                 <div className='d-flex justify-content-center flex-wrap'>
                     <div className="row">
                         {cardAuctions.map((auction, index) => (
-                            <div key={index} className="col-4 col-lg-3 d-flex justify-content-center flex-wrap">
+                             <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
+                             initial={{ opacity: 0, y: -50 }}
+                             animate={{ opacity: 1, y: 0 }}
+                             transition={{ duration: 2.5, delay: index * 0.5 }}
+                            >
                                 <div className="card shadow bg-light">
                                     <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
                                     <div className="card-body">
@@ -82,14 +92,15 @@ const AllAuctions = () => {
                                             <button 
                                                 className="btn btn-primary" 
                                                 onClick={() => makeBid(auction.id)} 
-                                                disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}>
+                                                disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}
+                                            >
                                                 Dar Lance
                                             </button>
-                                            { auctionsWithZeroTime.some(a => a.id === auction.id) == true ? <p>Expirado</p> : <p></p>}
+                                            { auctionsWithZeroTime.some(a => a.id === auction.id) && <p>Expirado</p>}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>

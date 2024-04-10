@@ -122,7 +122,7 @@ const FormProductRegister = () => {
                                     value={inputDatas.imageUrl}
                                     onChange={handleChange}
                                     data-testid="imageUrl"
-                                    required disabled />
+                                    required />
                             </div>
 
                             <button

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import "../../css/table.css";
 import "../../css/styles.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { useNavigate } from 'react-router-dom';
 import CountdownTimer from './countdownTimer';
@@ -53,13 +54,16 @@ const AllAuctions = () => {
 
     const makeBid = async (auctionId) => {
         try {
-            const response = await axios.post(`http://localhost:8080/bid`, dataBid, config);
+            const response = await axios.post(`http://localhost:8080/bid`, { auctionId }, config);
             console.log(response.data);
+            // Adicione aqui o código para lidar com a resposta do servidor, se necessário
         } catch (error) {
             console.error(`Erro ao fazer o lance: ${error}`);
         }
     };
 
+    const numCardsPerRow = window.innerWidth < 550 ? 1 : 4; 
+    const cardWidth = `col-lg-${Math.floor(12 / numCardsPerRow)}`;
     return (
         <>
         <Top />
@@ -67,7 +71,11 @@ const AllAuctions = () => {
                 <div className='d-flex justify-content-center flex-wrap'>
                     <div className="row">
                         {cardAuctions.map((auction, index) => (
-                            <div key={index} className='col-12 col-lg-4 d-flex justify-content-center flex-wrap'>
+                            <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
+                                initial={{ opacity: 0, y: -50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 2.5, delay: index * 0.5 }}
+                            >
                                 <div className="card shadow bg-light">
                                     <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
                                     <div className="card-body">
@@ -78,15 +86,15 @@ const AllAuctions = () => {
                                         <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
                                         <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
                                         <div className="text-center">
-                                           </div>
+                                            <button className="btn btn-primary" onClick={() => makeBid(auction.id)} disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}>Dar Lance</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
             </div>
-
             <Footer />
         </>
     );
