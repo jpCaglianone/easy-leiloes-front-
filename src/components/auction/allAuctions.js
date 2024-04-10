@@ -52,51 +52,52 @@ const AllAuctions = () => {
         setAuctionsWithZeroTime(auctionsWithZeroTime);
     }, [cardAuctions]);
 
-    const makeBid = async (auctionId) => {
-        try {
-            const response = await axios.post(`http://localhost:8080/bid`, { auctionId }, config);
-            console.log(response.data);
-            // Adicione aqui o código para lidar com a resposta do servidor, se necessário
-        } catch (error) {
-            console.error(`Erro ao fazer o lance: ${error}`);
-        }
-    };
 
-    const numCardsPerRow = window.innerWidth < 550 ? 1 : 4; 
+    const numCardsPerRow = window.innerWidth < 550 ? 1 : 3;
     const cardWidth = `col-lg-${Math.floor(12 / numCardsPerRow)}`;
-    return (
-        <>
-        <Top />
-            <div className='container'>
-                <div className='d-flex justify-content-center flex-wrap'>
-                    <div className="row">
-                        {cardAuctions.map((auction, index) => (
-                            <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
-                                initial={{ opacity: 0, y: -50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 2.5, delay: index * 0.5 }}
-                            >
-                                <div className="card shadow bg-light">
-                                    <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{auction.name}</h5>
-                                        <p className="card-text">{auction.description}</p>
-                                        <p className="card-text">Modelo: {auction.model}</p>
-                                        <p className="card-text">Especificações: {auction.specifications}</p>
-                                        <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
-                                        <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
-                                        <div className="text-center">
-                                           </div>
+
+    if (cardAuctions.length > 0) {
+        return (
+            <>
+                <Top />
+                <div className='container'>
+                    <div className='d-flex justify-content-center flex-wrap'>
+                        <div className="row">
+                            {cardAuctions.map((auction, index) => (
+                                <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
+                                    initial={{ opacity: 0, y: -50 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 2.5, delay: index * 0.5 }}
+                                >
+                                    <div className="card shadow bg-light">
+                                        <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{auction.name}</h5>
+                                            <p className="card-text">{auction.description}</p>
+                                            <p className="card-text">Modelo: {auction.model}</p>
+                                            <p className="card-text">Especificações: {auction.specifications}</p>
+                                            <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
+                                            <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
+                                            <div className="text-center">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer />
-        </>
-    );
+                <Footer />
+            </>
+        );
+    }
+    else {
+        return (
+            <>
+                <h1 className='text-danger'>Não há leilões para participar no momento !</h1>
+            </>
+        )
+    }
 };
 
 export default AllAuctions;

@@ -6,7 +6,7 @@ const UserAllOtherProducts = () => {
 
     return (
         <>
-            <Link to="/userPanel/allOtherProducts" style={{ textDecoration: 'none' }}>
+            <Link to="/userPanel/allOtherAuctions" style={{ textDecoration: 'none' }}>
                 <div className="container card-user">
                     <div className="row">
                         <div className="col card-content">

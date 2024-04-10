@@ -73,7 +73,7 @@ const TableListProducts = () => {
                             </div>
                         ))
                     ) : (
-                        <h1 className='text-danger'>Não há leiloes ativos no momento</h1>
+                        <h1 className='text-danger'>Não há produtos cadastrados para este usuário! </h1>
                     )}
                 </div>
             </div>

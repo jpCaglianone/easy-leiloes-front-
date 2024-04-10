@@ -7,7 +7,7 @@ import UserNotifications from "./userNotifications";
 import UserProducts from "./userProducts";
 import Top from '../header/top'
 import Footer from '../footer';
-import UserAllOtherProducts from "../user/userAllOthersAuctions";
+import UserAllOtherAuctions from "../user/userAllOthersAuctions";
 import "../../css/styles.css";
 
 
@@ -41,7 +41,7 @@ const UserPanel = () => {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-6">
-                        <UserAllOtherProducts/>
+                        <UserAllOtherAuctions/>
                     </div>
                 </div>
             </div>

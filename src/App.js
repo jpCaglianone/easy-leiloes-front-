@@ -53,7 +53,7 @@ function App() {
           <Route path="/userPanel/productsPanel" element={<ProductsPanel />}></Route>
           <Route path="/newAuction" element={<NewAuction />}></Route>
           <Route path="/userPanel/allAuctionsPanel" element={<AllAuctions />}></Route>
-          <Route path="/userPanel/allOtherProducts" element={<AllOtherAuctions />}></Route>
+          <Route path="/userPanel/allOtherAuctions" element={<AllOtherAuctions />}></Route>
         </Routes>
       </Router>
     </UserContext.Provider>

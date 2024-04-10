@@ -10,7 +10,7 @@ import Top from '../header/top';
 import Footer from '../footer';
 import { motion } from 'framer-motion';
 
-const AllAuctions = () => {
+const AllOtherAuctions = () => {
     const { __secTK } = useContext(UserContext);
     const { userUuid } = useContext(UserContext);
     const { userId } = useContext(UserContext);
@@ -18,9 +18,9 @@ const AllAuctions = () => {
     const [auctionsWithZeroTime, setAuctionsWithZeroTime] = useState([]);
     const token = __secTK.trim();
     const navigate = useNavigate();
-    const [currentBid, setCurrentBid] = useState({});
+    const [currentBid, setCurrentBid] = useState(0);
     const [ws, setWs] = useState(null);
-    
+
     const config = {
         headers: {
             'Authorization': `${token}`,
@@ -39,7 +39,7 @@ const AllAuctions = () => {
 
                 const allInforms = auxAuctions.map(auction => {
                     const product = auxProducts.find(prod => prod.id === auction.productId);
-                    return { ...auction, ...product };
+                    return { ...auction, ...product, actualValue : auction.initialPrice};
                 });
 
                 setCardAuctions(allInforms);
@@ -55,16 +55,18 @@ const AllAuctions = () => {
         webSocket.onerror = (error) => console.error('WebSocket Error:', error);
         webSocket.onmessage = (event) => {
             console.log(`Recebendo lance via websocket - ${event.data} event: ${event}. StringFy: ${JSON.stringify(event)}`)
-          const data = JSON.parse(event.data);
-            setCardAuctions((currentAuctions) => currentAuctions.map((auction) => {
-                setCurrentBid((currentBid) => {
-                    return {
-                        ...currentBid,
-                        [auction.id]: data.amount
-                    };
+            const data = JSON.parse(event.data);
+
+            setCardAuctions((prevAuctions) => {
+                return prevAuctions.map(auction => {
+                    if (auction.id === data.auctionId){
+                        return { ...auction, actualValue: auction.initialPrice + data.amount };
+                    }
+                    else{
+                        return auction
+                    }
                 });
-                return auction;
-            }));
+            });
         };
         setWs(webSocket);
         return () => webSocket.close();
@@ -76,67 +78,77 @@ const AllAuctions = () => {
         setAuctionsWithZeroTime(auctionsWithZeroTime);
     }, [cardAuctions]);
 
-    const makeBid = (increment, auctionId) => {
+    const makeBid = (auctionId) => {
         let inputBid = {
             "auctionId": auctionId,
             "bidderUuid": userUuid,
-            "amount": 110
+            "amount": currentBid + 10
         };
+        setCurrentBid(prevBid => prevBid + 10)
 
         axios.post('http://localhost:8080/auction-api/bid', inputBid, config)
-        .then((response) => {
-            console.log(`Lance efetuado com sucesso: ${JSON.stringify(response)}`);
-        })
-        .catch((error) => {
-            console.error(`Erro na requisição: ${error}`);
-        });
+            .then((response) => {
+                console.log(`Lance efetuado com sucesso: ${JSON.stringify(response)}`);
+            })
+            .catch((error) => {
+                console.error(`Erro na requisição: ${error}`);
+            });
     };
 
-    const numCardsPerRow = window.innerWidth < 650 ? 1 : 4; 
+    const numCardsPerRow = window.innerWidth < 650 ? 1 : 4;
     const cardWidth = `col-lg-${Math.floor(12 / numCardsPerRow)}`;
-
-    return (
-        <>
-            <Top />
-            <div className='container'>
-                <div className='d-flex justify-content-center flex-wrap'>
-                    <div className="row">
-                        {cardAuctions.map((auction, index) => (
-                            <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
-                                initial={{ opacity: 0, y: -50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 2.5, delay: index * 0.5 }}
-                            >
-                                <div className="card shadow bg-light">
-                                    <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{auction.name}</h5>
-                                        <p className="card-text">{auction.description}</p>
-                                        <p className="card-text">Modelo: {auction.model}</p>
-                                        <p className="card-text">Especificações: {auction.specifications}</p>
-                                        <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
-                                        <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
-                                        <p>Lance Atual: {currentBid[auction.id]}</p>
-                                        <div className="text-center">
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() => makeBid(10, auction.id)}
-                                                disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}
-                                            >
-                                                Dar Lance
-                                            </button>
-                                            {auctionsWithZeroTime.some(a => a.id === auction.id) && <p>Expirado</p>}
+    
+    if (cardAuctions.length > 0) {
+        return (
+            <>
+                <Top />
+                <div className='container'>
+                    <div className='d-flex justify-content-center flex-wrap'>
+                        <div className="row">
+                            {cardAuctions.map((auction, index) => (
+                                <motion.div key={index} className={`d-flex ${cardWidth} justify-content-center flex-wrap card-auction`}
+                                    initial={{ opacity: 0, y: -50 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 2.5, delay: index * 0.5 }}
+                                >
+                                    <div className="card shadow bg-light">
+                                        <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{auction.name}</h5>
+                                            <p className="card-text">{auction.description}</p>
+                                            <p className="card-text">Modelo: {auction.model}</p>
+                                            <p className="card-text">Especificações: {auction.specifications}</p>
+                                            <p className="card-text">Preço inicial: {"R$" + auction.initialPrice + ",00"}</p>
+                                            <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
+                                            <p>Preço atual : {auction.actualValue}</p>
+                                            <div className="text-center">
+                                                <button
+                                                    className="btn btn-primary"
+                                                    onClick={() => makeBid(auction.id)}
+                                                    disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}
+                                                >
+                                                    Dar Lance
+                                                </button>
+                                                {auctionsWithZeroTime.some(a => a.id === auction.id) && <p>Encerrado</p>}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer />
-        </>
-    );
+                <Footer />
+            </>
+        );
+    }
+    else {
+        return (
+            <>
+                <h1 className='text-danger'>Não há leilões para participar no momento !</h1>
+            </>
+        )
+    }
 };
 
-export default AllAuctions;
+export default AllOtherAuctions;

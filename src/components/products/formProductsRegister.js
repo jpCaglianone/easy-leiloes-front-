@@ -42,12 +42,9 @@ const FormProductRegister = () => {
             await axios.post(url, data, config)
             window.alert("Produto registrado com sucesso!")
             clearInputs()
-               
         } catch (error) {
             console.error(error);
         }
-
-       
     }
 
     function handleChange(e) {
