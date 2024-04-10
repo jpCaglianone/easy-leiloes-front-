@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import "../../css/table.css";
 import "../../css/styles.css";
@@ -7,17 +5,18 @@ import axios from 'axios';
 import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useNavigate } from 'react-router-dom';
+import CountdownTimer from './countdownTimer';
 
-const allOtherAuctions = () => {
+const allAuctions = () => {
     const [auctions, setAuctions] = useState();
     const { userId, setUserId } = useContext(UserContext);
     const { __secTK } = useContext(UserContext)
     const [products, setProducts] = useState([])
-    const [currentPrice, setCurrentPrice] = useState(0)
     const [cardAuctions, setCardAuctions] = useState([])
+    const [currentPrice, setCurrentPrice] = useState()
     const token = __secTK.trim();
-    const { userUuid } = useContext(UserContext)
     const navigate = useNavigate();
+    const [auctionsWithZeroTime, setAuctionsWithZeroTime] = useState([]);
 
     const config = {
         headers: {
@@ -39,7 +38,7 @@ const allOtherAuctions = () => {
             clearSessionStorage();
 
             try {
-                const response = await axios.get(`http://localhost:8080/auction-api/auction/other/${userUuid}`, config);
+                const response = await axios.get('http://localhost:8080/auction-api/auction', config);
                 auxAuctions = response.data.data.Auctions;
 
             } catch (error) {
@@ -47,7 +46,7 @@ const allOtherAuctions = () => {
             }
 
             try {
-                const response = await axios.get(`http://localhost:8080/auction-api/product/other/${userId}`, config);
+                const response = await axios.get(`http://localhost:8080/auction-api/product`, config);
                 auxProducts = response.data.data.Products
 
             } catch (error) {
@@ -62,87 +61,59 @@ const allOtherAuctions = () => {
                 }
             }
 
-
-            setCardAuctions(allInforms)
-
+            setCardAuctions(allInforms);
         };
 
         fetchAuctions();
     }, []);
 
-    // function makeBid(e) {
-    //     // @Id
-    //     // private Long id;
-    //     // @Builder.Default
-    //     // private String uuid = UUID.randomUUID().toString();
-    //     // @Version
-    //     // private Long version;
-    //     // private Long auctionId;
-    //     // private String bidderUuid;
-    //     // private Double amount;
+    useEffect(() => {
+        const auctionsWithZeroTime = cardAuctions.filter(auction => {
+            return new Date(auction.auctionEndDate) <= new Date();
+        });
 
+        setAuctionsWithZeroTime(auctionsWithZeroTime);
+    }, [cardAuctions]);
 
-    //     e.preventDefault()
-    //     const url = 'http://localhost:8080/auction-api/product';
-    //     const data = inputDatas;
-    //     const token = __secTK.trim();
+    function makeBid(e) {
+        e.preventDefault();
+        // Sua lógica para fazer o lance aqui
+    }
 
-    //     const config = {
-    //         headers: {
-    //             'Authorization': `${token}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
-    //     try {
-    //         axios.post(url, data, config)
-    //         window.alert("Produto registrado com sucesso!")
-    //         clearInputs()
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+    return (
+        <>
+            <div className='container'>
+                <div className='d-flex justify-content-center flex-wrap'>
+                    <div className="row">
+                        {cardAuctions.map((auction, index) => (
+                            <div key={index} className="col-6 d-flex justify-content-center flex-wrap">
 
-    if (cardAuctions.lenght !== 0) {
-        return (
-            <>
-                <div className='container'>
-                    <div className='col-12 d-flex justify-content-center flex-wrap'>
-                        <div className="row gy-5">
-
-                            {cardAuctions.map((auction, index) => (
-                                <div key={index} className="col-6 d-flex justify-content-center flex-wrap">
-
-                                    <div className="card shadow bg-light">
-                                        <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{auction.name}</h5>
-                                            <p className="card-text">{auction.description}</p>
-                                            <p className="card-text">Modelo: {auction.model}</p>
-                                            <p className="card-text">Especificações: {auction.specifications}</p>
-                                            <p className="card-text">Preço inicial: {"R$ " + auction.initialPrice + ",00"}</p>
-                                            <p className="card-text">Preço atual:{currentPrice + auction.initialPrice}</p>
-                                            <button className='btn btn-success'>
-                                                Dar Lance (incremento automatico de 1 real) </button>
-                                            <div className="text-center">
-
-                                            </div>
+                                <div className="card shadow bg-light">
+                                    <img src={auction.imageUrl} className="card-img-top" alt={auction.name} />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{auction.name}</h5>
+                                        <p className="card-text">{auction.description}</p>
+                                        <p className="card-text">Modelo: {auction.model}</p>
+                                        <p className="card-text">Especificações: {auction.specifications}</p>
+                                        <p className="card-text">Preço inicial: {auction.initialPrice + "00"}</p>
+                                        <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
+                                        <p className="card-text">Preço atual: {currentPrice}</p>
+                                        <div className="text-center">
+                                            {auctionsWithZeroTime.some(a => a.id === auction.id) ? (
+                                                <button className="btn btn-primary" disabled>Dar Lance</button>
+                                            ) : (
+                                                <button className="btn btn-primary" onClick={makeBid}>Dar Lance</button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-
-            </>
-
-        );
-    }
-    else {
-        return (
-            <h1 className='text-danger'>Não há leiloes ativos no momento</h1>)
-    }
+            </div>
+        </>
+    );
 };
 
-export default allOtherAuctions;
+export default allAuctions;

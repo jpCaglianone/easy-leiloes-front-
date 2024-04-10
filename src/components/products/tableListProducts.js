@@ -6,21 +6,12 @@ import axios from 'axios';
 import { useContext } from "react";
 import { UserContext } from "../../App";
 
-
 const TableListProducts = () => {
-
     const { __secTK } = useContext(UserContext)
     const [products, setProducts] = useState([]);
     const token = __secTK.trim();
 
-    const clearSessionStorage = () => {
-        sessionStorage.clear();
-    }
-
     useEffect(() => {
-
-        clearSessionStorage();
-
         const config = {
             headers: {
                 'Authorization': `${token}`,
@@ -37,7 +28,6 @@ const TableListProducts = () => {
             });
     }, [])
 
-
     function deleteItem(productName) {
         if (window.confirm("Deseja realmente deletar esse item?")) {
             const updatedProducts = products.filter(item => item.name !== productName);
@@ -53,44 +43,43 @@ const TableListProducts = () => {
         sessionStorage.setItem('product', JSON.stringify(product));
     }
 
-if (products.length !== 0){
     return (
         <div className='container'>
             <div className='col-12 d-flex justify-content-center flex-wrap'>
                 <div className="row gy-5">
-                    {products.map((product, index) => (
-                        <div key={index} className="col-3 d-flex justify-content-center flex-wrap">
-
-                            <div className="card shadow bg-light">
-                                {/* Aqui você pode adicionar a imagem ilustrativa */}
-                                <img src={product.imageUrl} className="card-img-top" alt={product.name} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{product.name}</h5>
-                                    <p className="card-text">{product.description}</p>
-                                    <p className="card-text">Modelo: {product.model}</p>
-                                    <p className="card-text">Especificações: {product.specifications}</p>
-                                    <div className="text-center">
-                                        <Link
-                                            to="/newAuction"
-                                            onClick={() => handleClick(product)}
-                                            className="btn btn-success mr-2"
-                                        >
-                                            Criar leilão
-                                        </Link>
-                                        <button className="btn btn-primary mr-2">Editar</button>
-                                        <button className="btn btn-danger" onClick={deleteItem}>Excluir</button>
+                    {products.length !== 0 ? (
+                        products.map((product, index) => (
+                            <div key={index} className={`col-${12 / products.length} d-flex justify-content-center flex-wrap`}>
+                                <div className="card shadow bg-light">
+                                    {/* Aqui você pode adicionar a imagem ilustrativa */}
+                                    <img src={product.imageUrl} className="card-img-top" alt={product.name} />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{product.name}</h5>
+                                        <p className="card-text">{product.description}</p>
+                                        <p className="card-text">Modelo: {product.model}</p>
+                                        <p className="card-text">Especificações: {product.specifications}</p>
+                                        <div className="text-center">
+                                            <Link
+                                                to="/newAuction"
+                                                onClick={() => handleClick(product)}
+                                                className="btn btn-success mr-2"
+                                            >
+                                                Criar leilão
+                                            </Link>
+                                            <button className="btn btn-primary mr-2">Editar</button>
+                                            <button className="btn btn-danger" onClick={() => deleteItem(product.name)}>Excluir</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <h1 className='text-danger'>Não há leiloes ativos no momento</h1>
+                    )}
                 </div>
             </div>
         </div>
-    );}
-    else {
-        return (<h1 className='text-danger'>Não há leiloes ativos no momento</h1>)
-    }
+    );
 };
 
 export default TableListProducts;
