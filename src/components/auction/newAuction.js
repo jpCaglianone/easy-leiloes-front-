@@ -29,28 +29,27 @@ const NewAuction = () => {
     const product = JSON.parse(sessionStorage.getItem('product'));
 
     function sendRequest() {
-
-        let inputDatas = ({
+        const startDate = new Date(); 
+        const endDate = new Date(startDate.getTime() + (Number(timeAuction) * 60000)); 
+    
+        let inputDatas = {
             "productId": product.id,
             "auctionOwnerUuid": userId,
-            "auctionStartDate": actualDate,
-            "auctionEndDate": new Date(actualDate.setMinutes(actualDate.getMinutes() + Number(timeAuction))).toISOString(),
+            "auctionStartDate": startDate.toISOString(), 
+            "auctionEndDate": endDate.toISOString(), 
             "initialPrice" : maskVal,
             "auctionStatus": "ACTIVE"
-
-        })
+        };
+    
         axios.post('http://localhost:8080/auction-api/auction', inputDatas, config)
             .then((response) => {
-                console.log(response)
-                setIsDisabed(true)
-                setAuctionCreated(true)
-        
-            }     
-            )
+                console.log(response);
+                setIsDisabed(true);
+                setAuctionCreated(true);
+            })
             .catch((error) => {
                 console.error(`Erro na requisição: ${error}`);
             });
-
     }
 
     function maskValue(event) {

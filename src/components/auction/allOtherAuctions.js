@@ -47,7 +47,7 @@ const allOtherAuctions = () => {
             }
 
             try {
-                const response = await axios.get(`http://localhost:8080/auction-api/product`, config);
+                const response = await axios.get(`http://localhost:8080/auction-api/product/other/${userId}`, config);
                 auxProducts = response.data.data.Products
 
             } catch (error) {
@@ -70,37 +70,37 @@ const allOtherAuctions = () => {
         fetchAuctions();
     }, []);
 
-    function makeBid(e) {
-        // @Id
-        // private Long id;
-        // @Builder.Default
-        // private String uuid = UUID.randomUUID().toString();
-        // @Version
-        // private Long version;
-        // private Long auctionId;
-        // private String bidderUuid;
-        // private Double amount;
+    // function makeBid(e) {
+    //     // @Id
+    //     // private Long id;
+    //     // @Builder.Default
+    //     // private String uuid = UUID.randomUUID().toString();
+    //     // @Version
+    //     // private Long version;
+    //     // private Long auctionId;
+    //     // private String bidderUuid;
+    //     // private Double amount;
 
 
-        e.preventDefault()
-        const url = 'http://localhost:8080/auction-api/product';
-        const data = inputDatas;
-        const token = __secTK.trim();
+    //     e.preventDefault()
+    //     const url = 'http://localhost:8080/auction-api/product';
+    //     const data = inputDatas;
+    //     const token = __secTK.trim();
 
-        const config = {
-            headers: {
-                'Authorization': `${token}`,
-                'Content-Type': 'application/json'
-            }
-        };
-        try {
-            axios.post(url, data, config)
-            window.alert("Produto registrado com sucesso!")
-            clearInputs()
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //     const config = {
+    //         headers: {
+    //             'Authorization': `${token}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //     };
+    //     try {
+    //         axios.post(url, data, config)
+    //         window.alert("Produto registrado com sucesso!")
+    //         clearInputs()
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
     if (cardAuctions.lenght !== 0) {
         return (
