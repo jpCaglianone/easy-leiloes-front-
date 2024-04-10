@@ -28,9 +28,9 @@ const TableListProducts = () => {
             });
     }, [])
 
-    function deleteItem(productName) {
+    function deleteItem(productId) {
         if (window.confirm("Deseja realmente deletar esse item?")) {
-            const updatedProducts = products.filter(item => item.name !== productName);
+            const updatedProducts = products.filter(item => item.id !== productId);
             setProducts(updatedProducts);
             alert("Produto excluído");
             // TODO: Aqui tem que ser enviada uma requisição
@@ -51,7 +51,6 @@ const TableListProducts = () => {
                         products.map((product, index) => (
                             <div key={index} className={`col-${12 / products.length} d-flex justify-content-center flex-wrap`}>
                                 <div className="card shadow bg-light">
-                                    {/* Aqui você pode adicionar a imagem ilustrativa */}
                                     <img src={product.imageUrl} className="card-img-top" alt={product.name} />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
@@ -67,7 +66,7 @@ const TableListProducts = () => {
                                                 Criar leilão
                                             </Link>
                                             <button className="btn btn-primary mr-2">Editar</button>
-                                            <button className="btn btn-danger" onClick={() => deleteItem(product.name)}>Excluir</button>
+                                            <button className="btn btn-danger" onClick={() => deleteItem(product.id)}>Excluir</button>
                                         </div>
                                     </div>
                                 </div>

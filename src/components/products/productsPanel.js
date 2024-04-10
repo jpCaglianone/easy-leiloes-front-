@@ -4,7 +4,9 @@ import MainProducts from "./mainProducts";
 import React from "react";
 import { useState, useEffect } from "react";
 import "../../css/styles.css";
-
+import Top from "../header/top";
+import Footer from "../footer";
+import BackUserPanel from "./backUserPanel";
 const ProductsPanel = () => {
 
 
@@ -21,8 +23,14 @@ const ProductsPanel = () => {
 
     return (
         <>
+        <Top />
             <div className="container user-panel">
                 <div className="row justify-content-center" id="user-panel">
+
+                    <div className="col-2">
+                        <BackUserPanel/>
+                    </div>
+
                     <div className="col-2">
                         <ProductsRegister onClick={() => activeCard("Register")} />
                     </div>
@@ -30,11 +38,14 @@ const ProductsPanel = () => {
                     <div className="col-2">
                         <ProductsList onClick={() => activeCard("List")} />
                     </div>
+
+                    
                 </div>
             </div>
 
             <MainProducts type={typeAction} ></MainProducts>
 
+        <Footer/>
         </>
     )
 }

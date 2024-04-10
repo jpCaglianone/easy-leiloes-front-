@@ -112,6 +112,14 @@ form>div>label {
     margin: 50px auto 150px;
 }
 
+button{
+    margin-top: 25px;
+}
+
+.container{
+    margin: 75px auto;
+}
+
 .card-user {
     margin: 20px auto;
     height: 150px;
@@ -147,7 +155,8 @@ form>div>label {
 }
 
 .bi-card-list,
-.bi-plus-circle-fill {
+.bi-plus-circle-fill,
+.bi-box-arrow-left {
     margin-top: 20px;
     width: 40%;
 }
@@ -160,7 +169,8 @@ form>div>label {
 .card-user:hover .bi-three-dots,
 .card-user:hover .bi-bandaid-fill,
 .card-user:hover .bi-card-list,
-.card-user:hover .bi-plus-circle-fill {
+.card-user:hover .bi-plus-circle-fill,
+.card-user:hover .bi-box-arrow-left {
     fill: goldenrod;
     color: goldenrod;
     margin: 50px;
