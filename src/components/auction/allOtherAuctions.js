@@ -20,6 +20,7 @@ const AllOtherAuctions = () => {
     const navigate = useNavigate();
     const [currentBid, setCurrentBid] = useState(0);
     const [ws, setWs] = useState(null);
+    const[first, setFirst] = useState(false)
 
     const config = {
         headers: {
@@ -39,7 +40,10 @@ const AllOtherAuctions = () => {
 
                 const allInforms = auxAuctions.map(auction => {
                     const product = auxProducts.find(prod => prod.id === auction.productId);
-                    return { ...auction, ...product, actualValue : auction.initialPrice};
+                    if (!first) {
+                        return { ...auction, ...product, actualValue: auction.initialPrice }; //talvez mude de lugar
+                    }
+                    
                 });
 
                 setCardAuctions(allInforms);
@@ -59,10 +63,11 @@ const AllOtherAuctions = () => {
 
             setCardAuctions((prevAuctions) => {
                 return prevAuctions.map(auction => {
-                    if (auction.id === data.auctionId){
-                        return { ...auction, actualValue: auction.initialPrice + data.amount };
+                    if (auction.id === data.auctionId) {
+                        setCurrentBid(data.amount)
+                        return { ...auction, actualValue: data.amount };
                     }
-                    else{
+                    else {
                         return auction
                     }
                 });
@@ -78,13 +83,15 @@ const AllOtherAuctions = () => {
         setAuctionsWithZeroTime(auctionsWithZeroTime);
     }, [cardAuctions]);
 
-    const makeBid = (auctionId) => {
+    const makeBid = (auctionId, actualValue) => {
         let inputBid = {
             "auctionId": auctionId,
             "bidderUuid": userUuid,
-            "amount": currentBid + 10
+            "amount": actualValue + 10
         };
-        setCurrentBid(prevBid => prevBid + 10)
+        
+
+        setFirst(true)
 
         axios.post('http://localhost:8080/auction-api/bid', inputBid, config)
             .then((response) => {
@@ -97,7 +104,7 @@ const AllOtherAuctions = () => {
 
     const numCardsPerRow = window.innerWidth < 650 ? 1 : 4;
     const cardWidth = `col-lg-${Math.floor(12 / numCardsPerRow)}`;
-    
+
     if (cardAuctions.length > 0) {
         return (
             <>
@@ -124,7 +131,7 @@ const AllOtherAuctions = () => {
                                             <div className="text-center">
                                                 <button
                                                     className="btn btn-primary"
-                                                    onClick={() => makeBid(auction.id)}
+                                                    onClick={() => makeBid(auction.id, auction.actualValue)}
                                                     disabled={auctionsWithZeroTime.some(a => a.id === auction.id)}
                                                 >
                                                     Dar Lance
