@@ -20,7 +20,8 @@ const AllOtherAuctions = () => {
     const navigate = useNavigate();
     const [currentBid, setCurrentBid] = useState(0);
     const [ws, setWs] = useState(null);
-    const[first, setFirst] = useState(false)
+    const [highestBid, setHighestBid] = useState("Sem lances no momento!"); // Adicionando o estado para highestBid
+    const [first, setFirst] = useState(false);
 
     const config = {
         headers: {
@@ -41,9 +42,8 @@ const AllOtherAuctions = () => {
                 const allInforms = auxAuctions.map(auction => {
                     const product = auxProducts.find(prod => prod.id === auction.productId);
                     if (!first) {
-                        return { ...auction, ...product, actualValue: auction.initialPrice }; //talvez mude de lugar
+                        return { ...auction, ...product, actualValue: auction.initialPrice, highestBid: highestBid };
                     }
-                    
                 });
 
                 setCardAuctions(allInforms);
@@ -65,6 +65,7 @@ const AllOtherAuctions = () => {
                 return prevAuctions.map(auction => {
                     if (auction.id === data.auctionId) {
                         setCurrentBid(data.amount)
+                        setHighestBid(data.bidderUuid); // Definindo o estado de highestBid
                         return { ...auction, actualValue: data.amount };
                     }
                     else {
@@ -89,7 +90,7 @@ const AllOtherAuctions = () => {
             "bidderUuid": userUuid,
             "amount": actualValue + 10
         };
-        
+
 
         setFirst(true)
 
@@ -128,6 +129,7 @@ const AllOtherAuctions = () => {
                                             <p className="card-text">Preço inicial: {"R$" + auction.initialPrice + ",00"}</p>
                                             <p>Tempo Restante: <CountdownTimer endDate={auction.auctionEndDate} /></p>
                                             <p>Preço atual : {auction.actualValue}</p>
+                                            <p>Maior lance : Usuario de registro {highestBid.substring(0, 13)}</p>
                                             <div className="text-center">
                                                 <button
                                                     className="btn btn-primary"
