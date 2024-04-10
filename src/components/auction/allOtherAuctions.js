@@ -28,16 +28,6 @@ const AllAuctions = () => {
         }
     };
 
-    const getWebSocketConfig = () => {
-        const token = __secTK.trim();
-        return {
-            headers: {
-                'Authorization': `${token}`,
-                'Content-Type': 'application/json'
-            }
-        };
-    };
-
     useEffect(() => {
         const fetchAuctions = async () => {
             try {
@@ -64,18 +54,19 @@ const AllAuctions = () => {
         webSocket.onopen = () => console.log('WebSocket Connected');
         webSocket.onerror = (error) => console.error('WebSocket Error:', error);
         webSocket.onmessage = (event) => {
-            console.log(`CAGLIANONE ZIKADO data: ${event.data} event: ${event}. StringFy: ${JSON.stringify(event)}`)
+            console.log(`Recebendo lance via websocket - ${event.data} event: ${event}. StringFy: ${JSON.stringify(event)}`)
           const data = JSON.parse(event.data);
             setCardAuctions((currentAuctions) => currentAuctions.map((auction) => {
-                // if (auction.id === data.auctionId) {
-                //     return { ...auction, currentBid: data.amount };
-                // }
+                setCurrentBid((currentBid) => {
+                    return {
+                        ...currentBid,
+                        [auction.id]: data.amount
+                    };
+                });
                 return auction;
             }));
         };
         setWs(webSocket);
-    
-        // Clean up the WebSocket connection when the component unmounts
         return () => webSocket.close();
 
     }, []);
@@ -86,17 +77,19 @@ const AllAuctions = () => {
     }, [cardAuctions]);
 
     const makeBid = (increment, auctionId) => {
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            const bidData = {
-                auctionId: auctionId,
-                amount: 110,
-                bidderUuid: userUuid,
-            };
-            console.log("json stringfy bid data - " +JSON.stringify(bidData))
-            ws.send(JSON.stringify(bidData));
-        } else {
-            console.error('WebSocket is not connected.');
-        }
+        let inputBid = {
+            "auctionId": auctionId,
+            "bidderUuid": userUuid,
+            "amount": 110
+        };
+
+        axios.post('http://localhost:8080/auction-api/bid', inputBid, config)
+        .then((response) => {
+            console.log(`Lance efetuado com sucesso: ${JSON.stringify(response)}`);
+        })
+        .catch((error) => {
+            console.error(`Erro na requisição: ${error}`);
+        });
     };
 
     const numCardsPerRow = window.innerWidth < 650 ? 1 : 4; 
